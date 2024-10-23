@@ -1,20 +1,21 @@
-<script>
-import registercomponet from './iam/components/register.component.vue'
-/* import loginComponent from './iam/components/login.component.vue'; */
+<script >
+import SidebarComponent from './public/components/sidebar.component.vue';
 
 export default {
-    components:{
-        //loginComponent
-        registercomponet
-    }
+  components: {SidebarComponent}
 }
+
 
 </script>
 
 <template>
-    <registercomponet></registercomponet>
-   <!--  <loginComponent></loginComponent> -->
+    <SidebarComponent></SidebarComponent>
+    
 </template>
 
 <style scoped>
+#app{
+    display: flex;
+    min-height: 100vh;
+}
 </style>
