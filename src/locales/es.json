@@ -1,0 +1,16 @@
+{
+    "Access": {
+        "Login": "Iniciar Sesión",
+        "Register": "Registrarse",
+        "Username": "Usuario",
+        "uLabel": "ingresa tu nombre de usuario",
+        "Password": "Contraseña",
+        "pLabel": "ingresa tu contraseña",
+        "C_password": "Confirmar Contraseña",
+        "cpLabel": "confirma tu contraseña",
+        "SignIn": "Registrarse",
+        "ToLogin": "¿Ya tienes una cuenta?",
+        "ToRegister": "Crear cuenta",
+        "tuition": "colegiatura"
+    }
+}
