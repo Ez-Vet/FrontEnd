@@ -1,13 +1,13 @@
 <script>
 export default {
   name: "changelang.component",
-  data(){
+  data() {
     return {
       isEnglish: this.$i18n.locale === 'en'
     };
   },
-  methods:{
-    toggleLanguage(){
+  methods: {
+    toggleLanguage() {
       this.$i18n.locale = this.isEnglish ? 'en' : 'es';
     }
   }
@@ -15,9 +15,7 @@ export default {
 </script>
 
 <template>
-    <pv-togglebutton v-model="isEnglish" onLabel="EN" offLabel="ES" @change="toggleLanguage" class="px-10"/>
+  <pv-togglebutton v-model="isEnglish" onLabel="EN" offLabel="ES" @change="toggleLanguage" class="px-10" />
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

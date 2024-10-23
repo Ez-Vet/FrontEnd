@@ -9,11 +9,12 @@ import InputText from 'primevue/inputtext';
 import Toolbar from "primevue/toolbar";
 import Image from "primevue/image";
 import ToggleButton from 'primevue/togglebutton';
+import 'primeicons/primeicons.css';
 const app = createApp(App);
 
 app.use(i18n);
 
-/* app.use(PrimeVue, {
+app.use(PrimeVue, {
     theme: {
         preset: Aura,
         options: {
@@ -22,8 +23,8 @@ app.use(i18n);
             cssLayer: false
         }
     }
-}); */
-app.use(PrimeVue, { unstyled: true });
+});
+/* app.use(PrimeVue, { unstyled: true }); */
 
 app.component("pv-toolbar", Toolbar);
 app.component("pv-image", Image);
