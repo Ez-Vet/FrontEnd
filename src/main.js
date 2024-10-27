@@ -1,20 +1,16 @@
-import { createApp } from 'vue'
-import './style.css'
-import App from './App.vue'
-import PrimeVue from 'primevue/config';
-import Aura from '@primevue/themes/aura';
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './router';
+import { createI18n } from 'vue-i18n';
+import messages from './i18n/index.js'; // Importa correctamente el archivo index.js
 
-const app = createApp(App);
-
-app.use(PrimeVue, {
-    theme: {
-        preset: Aura,
-        options: {
-            prefix: 'p',
-            darkModeSelector: 'system',
-            cssLayer: false
-        }
-    }
+const i18n = createI18n({
+  locale: 'es', // Idioma predeterminado
+  fallbackLocale: 'en',
+  messages,
 });
 
-app.mount('#app');
+createApp(App)
+  .use(router)
+  .use(i18n)
+  .mount('#app');
