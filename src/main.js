@@ -10,10 +10,12 @@ import Toolbar from "primevue/toolbar";
 import Image from "primevue/image";
 import ToggleButton from 'primevue/togglebutton';
 import 'primeicons/primeicons.css';
+import router from './routes/index.js';
+
 const app = createApp(App);
 
 app.use(i18n);
-
+app.use(router);
 app.use(PrimeVue, {
     theme: {
         preset: Aura,

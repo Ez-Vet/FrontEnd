@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import sidebarComponent from '../sidebar.component.vue';
+import sidebarComponent from '../components/sidebar.component.vue';
 
 export default {
     name: 'SidebarLayout',
