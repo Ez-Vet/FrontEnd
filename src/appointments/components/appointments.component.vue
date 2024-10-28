@@ -1,0 +1,435 @@
+<template>
+    <div class="main-content">
+        <div class="header">
+            <h2>CITAS</h2>
+            <p>Veterinary patient database.</p>
+        </div>
+
+        <!-- Search bar y botón "Add new" alineados a la derecha -->
+        <div class="search-bar">
+            <InputText v-model="searchQuery" placeholder="Search pets" class="search-input" />
+            <Button label="Search" icon="pi pi-search" class="p-button-outlined search-button" />
+            <Button label="Add new" icon="pi pi-plus" class="p-button-success add-button" />
+        </div>
+
+        <!-- Filtros y Tabla -->
+        <div class="content-wrapper">
+            <!-- Tabla de citas con fotos -->
+            <div class="table-section">
+                <DataTable :value="filteredCitas" class="custom-table" responsiveLayout="scroll" :paginator="true"
+                    :rows="5">
+                    <!-- Agrupación de columnas (opcional) -->
+                    <template #header>
+                        <ColumnGroup>
+                            <Row>
+                                <Column header="Foto"></Column>
+                                <Column header="Mascota"></Column>
+                                <Column header="Fecha"></Column>
+                                <Column header="Hora"></Column>
+                                <Column header="Estado"></Column>
+                                <Column header="Diagnóstico"></Column>
+                            </Row>
+                        </ColumnGroup>
+                    </template>
+
+                    <!-- Columnas de la tabla -->
+                    <Column header="Foto" body="image">
+                        <template #body="slotProps">
+                            <img :src="getImagePath(slotProps.data.image)" alt="Mascota" class="pet-photo"
+                                v-if="slotProps.data.image" />
+                            <span v-else>No image</span>
+                        </template>
+                    </Column>
+
+                    <Column field="mascota" header="Mascota"></Column>
+                    <Column field="fecha" header="Fecha"></Column>
+                    <Column field="hora" header="Hora"></Column>
+                    <Column field="estado" header="Estado"></Column>
+                    <Column header="Diagnóstico">
+                        <template #body="slotProps">
+                            <div class="action-buttons">
+                                <Button label="Edit" class="edit-button p-button-sm"
+                                    @click="editarDiagnostico(slotProps.data)" />
+                                <Button label="History" class="history-button p-button-sm ml-2"
+                                    @click="verHistorial(slotProps.data)" />
+                            </div>
+                        </template>
+                    </Column>
+                </DataTable>
+            </div>
+
+            <!-- Sección de filtros -->
+            <div class="filter-section">
+                <h3>Buscar por:</h3>
+
+                <!-- Filtro por Mascota -->
+                <div class="filter-option">
+                    <AutoComplete v-model="selectedMascota" :suggestions="filteredMascotas"
+                        completeMethod="filterMascota" field="mascota" placeholder="Buscar por Mascota" />
+                </div>
+
+                <!-- Filtro por Fecha -->
+                <div class="filter-option">
+                    <Calendar v-model="selectedDate" dateFormat="yy-mm-dd" placeholder="Buscar por Fecha" />
+                </div>
+
+                <!-- Filtro por Estado (con opción "Todos") -->
+                <div class="filter-option">
+                    <Dropdown v-model="selectedEstado" :options="estados" optionLabel="estado"
+                        placeholder="Seleccionar Estado" />
+                </div>
+
+                <!-- Filtro por Dueño -->
+                <div class="filter-option">
+                    <AutoComplete v-model="selectedDueno" :suggestions="filteredDuenos" completeMethod="filterDueno"
+                        field="dueno" placeholder="Buscar por Dueño" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para ver y editar el historial -->
+    <Dialog header="Historial Clínico" v-model:visible="showHistoryDialog" :modal="true" :closable="true"
+        class="custom-dialog">
+        <div class="historial-card">
+            <h3>Historial Clínico - Mascota: {{ historialSeleccionado.mascota }}</h3>
+            <p><strong>Propietario:</strong> {{ historialSeleccionado.dueno }}</p>
+            <p><strong>🩺 Motivo de consulta:</strong> {{ historialSeleccionado.motivoConsulta }}</p>
+            <p><strong>📋 Diagnóstico presuntivo:</strong> {{ historialSeleccionado.diagnostico }}</p>
+            <p><strong>💊 Tratamiento:</strong> {{ historialSeleccionado.tratamiento }}</p>
+            <p><strong>📅 Observaciones adicionales:</strong> {{ historialSeleccionado.observaciones }}</p>
+        </div>
+        <Button label="Cerrar" icon="pi pi-times" class="p-button-danger mt-2" @click="showHistoryDialog = false" />
+    </Dialog>
+
+    <Dialog header="Editar Diagnóstico" v-model:visible="showEditDialog" :modal="true" :closable="true"
+        class="custom-dialog">
+        <div class="edit-card">
+            <h3>Editar Historial - Mascota: {{ citaSeleccionada.mascota }}</h3>
+            <p><strong>Propietario:</strong> {{ citaSeleccionada.dueno }}</p>
+            <hr />
+            <p><strong>🩺 Motivo de consulta:</strong></p>
+            <textarea v-model="citaSeleccionada.motivoConsulta" rows="2" class="editable-field"></textarea>
+
+            <p><strong>📋 Diagnóstico presuntivo:</strong></p>
+            <textarea v-model="citaSeleccionada.diagnostico" rows="2" class="editable-field"></textarea>
+
+            <p><strong>💊 Tratamiento:</strong></p>
+            <textarea v-model="citaSeleccionada.tratamiento" rows="2" class="editable-field"></textarea>
+
+            <p><strong>📅 Observaciones adicionales:</strong></p>
+            <textarea v-model="citaSeleccionada.observaciones" rows="2" class="editable-field"></textarea>
+        </div>
+        <Button label="Guardar Cambios" class="p-button-success mt-2" @click="guardarDiagnostico" />
+    </Dialog>
+</template>
+
+<script>
+import { ref, computed } from 'vue';
+import DataTable from 'primevue/datatable';
+import Column from 'primevue/column';
+import ColumnGroup from 'primevue/columngroup'; // para agrupar columnas opcionalmente
+import Row from 'primevue/row';               // para filas agrupadas opcionalmente
+import InputText from 'primevue/inputtext';
+import Button from 'primevue/button';
+import Dialog from 'primevue/dialog';
+import AutoComplete from 'primevue/autocomplete';
+import Calendar from 'primevue/calendar';
+import Dropdown from 'primevue/dropdown';
+
+export default {
+    components: {
+        DataTable,
+        Column,
+        ColumnGroup,
+        Row,
+        InputText,
+        Button,
+        Dialog,
+        AutoComplete,
+        Calendar,
+        Dropdown,
+    },
+    setup() {
+        const citas = ref([
+            {
+                mascota: 'Firulais',
+                fecha: '2024-10-20',
+                hora: '10:00',
+                estado: 'Pendiente',
+                diagnostico: 'Problemas de estómago',
+                motivoConsulta: 'Vómitos ocasionales, pérdida de apetito',
+                tratamiento: 'Dieta blanda por 48 horas',
+                observaciones: 'Monitorear signos de empeoramiento.',
+                dueno: 'Juan Pérez',
+                image: 'firulais.jpg'
+            },
+            {
+                mascota: 'Max',
+                fecha: '2024-11-02',
+                hora: '12:00',
+                estado: 'Atendido',
+                diagnostico: 'Problemas de piel',
+                motivoConsulta: 'Rascarse excesivamente',
+                tratamiento: 'Crema tópica antihistamínica',
+                observaciones: 'Revisar en 1 semana.',
+                dueno: 'María López',
+                image: 'max.jpg'
+            },
+            {
+                mascota: 'Luna',
+                fecha: '2024-10-25',
+                hora: '14:00',
+                estado: 'Pendiente',
+                diagnostico: 'Dolor en las articulaciones',
+                motivoConsulta: 'Dificultad para caminar y saltar',
+                tratamiento: 'Antiinflamatorio no esteroideo (meloxicam)',
+                observaciones: 'Control en 1 mes.',
+                dueno: 'Carlos Sánchez',
+                image: 'luna.jpg'
+            }
+        ]);
+
+        const searchQuery = ref('');
+        const selectedMascota = ref(null);
+        const selectedDate = ref(null);
+        const selectedEstado = ref(null);
+        const selectedDueno = ref(null);
+
+        // Añadir opción "Todos" en el estado
+        const estados = ref([{ estado: 'Todos' }, { estado: 'Pendiente' }, { estado: 'Atendido' }]);
+
+        const filteredCitas = computed(() => {
+            let filtered = citas.value;
+            if (searchQuery.value) {
+                filtered = filtered.filter((cita) =>
+                    cita.mascota.toLowerCase().includes(searchQuery.value.toLowerCase())
+                );
+            }
+            if (selectedDate.value) {
+                // Convertir la fecha seleccionada a un formato que coincida con las fechas de las citas
+                const formattedDate = new Date(selectedDate.value).toISOString().slice(0, 10);
+                filtered = filtered.filter((cita) => cita.fecha === formattedDate);
+            }
+            if (selectedEstado.value && selectedEstado.value.estado !== 'Todos') {
+                filtered = filtered.filter((cita) => cita.estado === selectedEstado.value.estado);
+            }
+            if (selectedMascota.value) {
+                filtered = filtered.filter((cita) =>
+                    cita.mascota.toLowerCase().includes(selectedMascota.value.toLowerCase())
+                );
+            }
+            if (selectedDueno.value) {
+                filtered = filtered.filter((cita) =>
+                    cita.dueno.toLowerCase().includes(selectedDueno.value.toLowerCase())
+                );
+            }
+            return filtered;
+        });
+
+        const filteredMascotas = ref([]);
+        const filteredDuenos = ref([]);
+
+        const filterMascota = (event) => {
+            filteredMascotas.value = citas.value
+                .map((cita) => cita.mascota)
+                .filter((mascota) =>
+                    mascota.toLowerCase().includes(event.query.toLowerCase())
+                );
+        };
+
+        const filterDueno = (event) => {
+            filteredDuenos.value = citas.value
+                .map((cita) => cita.dueno)
+                .filter((dueno) =>
+                    dueno.toLowerCase().includes(event.query.toLowerCase())
+                );
+        };
+
+        const showHistoryDialog = ref(false);
+        const showEditDialog = ref(false);
+        const citaSeleccionada = ref({});
+        const historialSeleccionado = ref({});
+
+        const verHistorial = (cita) => {
+            historialSeleccionado.value = cita;
+            showHistoryDialog.value = true;
+        };
+
+        const editarDiagnostico = (cita) => {
+            citaSeleccionada.value = { ...cita };
+            showEditDialog.value = true;
+        };
+
+        const guardarDiagnostico = () => {
+            const index = citas.value.findIndex((c) => c.mascota === citaSeleccionada.value.mascota);
+            if (index !== -1) {
+                citas.value[index] = { ...citaSeleccionada.value };
+            }
+            showEditDialog.value = false;
+        };
+
+        const getImagePath = (imageName) => {
+            if (imageName) {
+                return new URL(`../assets/img/${imageName}`, import.meta.url).href;
+            }
+            return null;
+        };
+
+        return {
+            citas,
+            searchQuery,
+            filteredCitas,
+            showHistoryDialog,
+            showEditDialog,
+            citaSeleccionada,
+            historialSeleccionado,
+            verHistorial,
+            editarDiagnostico,
+            guardarDiagnostico,
+            getImagePath,
+            selectedMascota,
+            selectedDate,
+            selectedEstado,
+            selectedDueno,
+            filteredMascotas,
+            filteredDuenos,
+            estados,
+            filterMascota,
+            filterDueno
+        };
+    },
+};
+</script>
+
+<style scoped>
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.header {
+    text-align: left;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.search-input {
+    width: 250px;
+}
+
+.search-button,
+.add-button {
+    padding: 10px 20px;
+    border-radius: 20px;
+}
+
+.content-wrapper {
+    display: flex;
+}
+
+.table-section {
+    flex-grow: 3;
+}
+
+.filter-section {
+    flex-grow: 1;
+    padding: 10px;
+    background-color: #ded6ee;
+    border-radius: 10px;
+}
+
+.filter-option {
+    background-color: #ded6ee;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.filter-option p {
+    margin: 0;
+}
+
+.custom-table {
+    width: 100%;
+    height: auto;
+}
+
+.custom-table .p-datatable-header {
+    background-color: #f0f0f0;
+}
+
+.custom-table .p-datatable-thead>tr>th {
+    background-color: #d1eaff;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.custom-table .p-datatable-tbody>tr>td {
+    padding: 10px;
+    background-color: white;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.pet-photo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.edit-button {
+    border: 1px solid #7776bc;
+    color: #7776bc;
+    background-color: transparent;
+}
+
+.history-button {
+    background-color: #7776bc;
+    color: white;
+}
+
+.ml-2 {
+    margin-left: 10px;
+}
+
+.custom-dialog {
+    width: 500px;
+    max-width: 100%;
+}
+
+.historial-card,
+.edit-card {
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.editable-field {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.mt-2 {
+    margin-top: 15px;
+}
+</style>
