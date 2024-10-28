@@ -1,0 +1,14 @@
+{
+    "personalInfo": {
+      "title": "Personal Information",
+      "editButton": "Edit Data",
+      "fullName": "Full Name",
+      "specialty": "Specialty",
+      "phone": "Phone",
+      "email": "Email"
+    },
+    "specialty": {
+      "surgeon": "Surgeon"
+    }
+  }
+  

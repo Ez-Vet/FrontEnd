@@ -1,22 +1,24 @@
+<!-- src/App.vue -->
 <template>
-    <div id="app">
-      <router-view />
+  <div class="app">
+    <Sidebar />
+    <div class="main-content">
+      <UserProfile />
     </div>
-  </template>
-  
-  <script>
-  export default {
-    name: 'App'
-  };
-  </script>
-  
-  <style>
-  /* Estilos generales */
-  #app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
-  }
-  </style>
-  
+  </div>
+</template>
+
+<script setup>
+import Sidebar from './components/Sidebar.vue';
+import UserProfile from './components/UserProfile.vue';
+</script>
+
+<style>
+.app {
+  display: flex;
+}
+.main-content {
+  flex-grow: 1;
+  padding: 1rem;
+}
+</style>
