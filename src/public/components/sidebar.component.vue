@@ -17,11 +17,13 @@ export default {
         </div>
 
         <div class="icons">
-            <button class="button">
-                <!-- <i class="pi pi-user"></i> -->
-                <img src="/img/user-icon.png">
-                Perfil
-            </button>
+            <RouterLink to="/profile">
+                <button class="button">
+                    <!-- <i class="pi pi-user"></i> -->
+                    <img src="/img/user-icon.png">
+                    Perfil
+                </button>
+            </RouterLink>
 
             <button class="button">
                 <!-- <i class="pi pi-address-book"></i> -->
