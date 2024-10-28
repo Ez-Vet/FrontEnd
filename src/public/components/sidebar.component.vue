@@ -23,11 +23,13 @@ export default {
                 Perfil
             </button>
 
-            <button class="button">
-                <!-- <i class="pi pi-address-book"></i> -->
-                <img src="/img/book-icon.png">
-                Citas
-            </button>
+            <RouterLink to="/appointments">
+                <button class="button">
+                    <!-- <i class="pi pi-address-book"></i> -->
+                    <img src="/img/book-icon.png">
+                    Citas
+                </button>
+            </RouterLink>
 
             <button class="button">
                 <img src="/img/pet-icon.png">
