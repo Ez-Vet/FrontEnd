@@ -8,41 +8,34 @@ export default {
   data() {
     return {
       users: null,
-      username: '',
+      email: '',
       password: '',
       errorMessage: null,
+      api: new AuthApiService()
     }
-  },
-  created() {
-    this.getData();
   },
   methods: {
     goToRegister() {
       this.$router.push('/register');
     },
-    getData() {
-      AuthApiService.getData().then((users) => {
-        this.users = users;
-      });
-
-    },
     login() {
 
-      if (!this.username || !this.password) {
+      if (!this.email || !this.password) {
         this.errorMessage = "Please, enter your username and password";
         return;
       }
 
-      console.log(this.username + " " + this.password);
-      AuthApiService.login(this.username, this.password)
+      console.log(this.email + " " + this.password);
+      this.api.login(this.email, this.password)
         .then((response) => {
-          if (response.success) {
+          const data = response.data;
 
-            this.$router.push('/home');
-          } else {
-
-            this.errorMessage = "username or password is incorrect";
+          if (data.length > 0) {
+            alert('Login successful.')
+            this.$router.push('/profile');
           }
+          else
+            this.errorMessage = "username or password is incorrect";
         })
         .catch((error) => {
           this.errorMessage = "problem with the authentication" + error.message;
@@ -71,7 +64,7 @@ export default {
         </div>
         <div class="flex flex-col gap-3">
           <label for="username" class="text-left">{{ $t('Access.Username') }}</label>
-          <pv-inputtext id="username" class="custom-input" v-model="username" type="text" size="small"
+          <pv-inputtext id="username" class="custom-input" v-model="email" type="text" size="small"
             placeholder="enter your username" />
 
           <label for="password" class="text-left">{{ $t('Access.Password') }}</label>
@@ -104,6 +97,7 @@ export default {
   color: mediumpurple;
 }
 
+
 .button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -126,8 +120,4 @@ export default {
 }
 </style>
 
-<style>
-body {
-  background: #fff;
-}
-</style>
+<style></style>

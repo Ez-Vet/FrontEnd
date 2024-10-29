@@ -1,10 +1,5 @@
 <template>
     <div class="main-content">
-        <div class="header">
-            <h2>CITAS</h2>
-            <p>Veterinary patient database.</p>
-        </div>
-
         <!-- Search bar y botón "Add new" alineados a la derecha -->
         <div class="search-bar">
             <InputText v-model="searchQuery" placeholder="Search pets" class="search-input" />
@@ -16,42 +11,36 @@
         <div class="content-wrapper">
             <!-- Tabla de citas con fotos -->
             <div class="table-section">
-                <DataTable :value="filteredCitas" class="custom-table" responsiveLayout="scroll" :paginator="true"
+                <DataTable :value="appointments" class="custom-table" responsiveLayout="scroll" :paginator="true"
                     :rows="5">
-                    <!-- Agrupación de columnas (opcional) -->
-                    <template #header>
-                        <ColumnGroup>
-                            <Row>
-                                <Column header="Foto"></Column>
-                                <Column header="Mascota"></Column>
-                                <Column header="Fecha"></Column>
-                                <Column header="Hora"></Column>
-                                <Column header="Estado"></Column>
-                                <Column header="Diagnóstico"></Column>
-                            </Row>
-                        </ColumnGroup>
-                    </template>
-
                     <!-- Columnas de la tabla -->
-                    <Column header="Foto" body="image">
-                        <template #body="slotProps">
-                            <img :src="getImagePath(slotProps.data.image)" alt="Mascota" class="pet-photo"
-                                v-if="slotProps.data.image" />
+                    <Column header="Foto">
+                        <template #body="{ data }">
+                            <img :src="data.pet.img" :alt="data.pet.name + ' photo'" class="pet-photo"
+                                v-if="data.pet.img" />
                             <span v-else>No image</span>
                         </template>
                     </Column>
 
-                    <Column field="mascota" header="Mascota"></Column>
-                    <Column field="fecha" header="Fecha"></Column>
-                    <Column field="hora" header="Hora"></Column>
-                    <Column field="estado" header="Estado"></Column>
+                    <Column field="pet.name" header="Mascota" />
+                    <Column field="date" header="Fecha" />
+                    <Column field="time" header="Hora" />
+                    <Column field="status" header="Estado" />
+
                     <Column header="Diagnóstico">
-                        <template #body="slotProps">
+                        <!-- <template #body="slotProps">
                             <div class="action-buttons">
                                 <Button label="Edit" class="edit-button p-button-sm"
                                     @click="editarDiagnostico(slotProps.data)" />
                                 <Button label="History" class="history-button p-button-sm ml-2"
                                     @click="verHistorial(slotProps.data)" />
+                            </div>
+                        </template> -->
+                        <template #body="{ data }">
+                            <div class="action-buttons">
+                                <Button label="Edit" class="edit-button p-button-sm" @click="editarDiagnostico(data)" />
+                                <Button label="History" class="history-button p-button-sm ml-2"
+                                    @click="verHistorial(data)" />
                             </div>
                         </template>
                     </Column>
@@ -136,6 +125,8 @@ import Dialog from 'primevue/dialog';
 import AutoComplete from 'primevue/autocomplete';
 import Calendar from 'primevue/calendar';
 import Dropdown from 'primevue/dropdown';
+import { AppointmentsApiService } from '../services/appointmentapi.service';
+import { Appointment } from '../model/appointment.entity'
 
 export default {
     components: {
@@ -149,6 +140,21 @@ export default {
         AutoComplete,
         Calendar,
         Dropdown,
+    },
+    data() {
+        return {
+            api: new AppointmentsApiService(),
+            appointments: null,
+            selectedAppointment: null
+        }
+    },
+    methods: {
+        verHistorial(data) {
+            const a = new Appointment(data);
+            console.log(a);
+            //this.selectedAppointment = new Appointment(data);
+            showHistoryDialog.value = true;
+        }
     },
     setup() {
         const citas = ref([
@@ -251,10 +257,11 @@ export default {
         const citaSeleccionada = ref({});
         const historialSeleccionado = ref({});
 
-        const verHistorial = (cita) => {
-            historialSeleccionado.value = cita;
+        /* const verHistorial = (data) => {
+            const a = new Appointment(data);
+            this.selectedAppointment = new Appointment(data);
             showHistoryDialog.value = true;
-        };
+        }; */
 
         const editarDiagnostico = (cita) => {
             citaSeleccionada.value = { ...cita };
@@ -284,7 +291,7 @@ export default {
             showEditDialog,
             citaSeleccionada,
             historialSeleccionado,
-            verHistorial,
+            /* verHistorial, */
             editarDiagnostico,
             guardarDiagnostico,
             getImagePath,
@@ -299,6 +306,13 @@ export default {
             filterDueno
         };
     },
+    mounted() {
+        this.api.getAppointments().then((response => {
+            const data = response.data;
+
+            this.appointments = data.map(appointment => new Appointment(appointment))
+        }))
+    }
 };
 </script>
 
@@ -306,12 +320,7 @@ export default {
 .main-content {
     flex-grow: 1;
     padding: 20px;
-}
-
-.header {
-    text-align: left;
-    margin-bottom: 20px;
-    font-size: 1.5rem;
+    align-self: center;
 }
 
 .search-bar {
@@ -334,6 +343,7 @@ export default {
 
 .content-wrapper {
     display: flex;
+    gap: 25px;
 }
 
 .table-section {
@@ -362,6 +372,13 @@ export default {
 .custom-table {
     width: 100%;
     height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.p-datatable-table {
+    background: red !important;
 }
 
 .custom-table .p-datatable-header {

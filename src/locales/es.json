@@ -2,7 +2,7 @@
     "Access": {
         "Login": "Iniciar Sesión",
         "Register": "Registrarse",
-        "Username": "Usuario",
+        "Fullname": "Nombre completo",
         "uLabel": "ingresa tu nombre de usuario",
         "Password": "Contraseña",
         "pLabel": "ingresa tu contraseña",
@@ -11,6 +11,24 @@
         "SignIn": "Registrarse",
         "ToLogin": "¿Ya tienes una cuenta?",
         "ToRegister": "Crear cuenta",
-        "tuition": "colegiatura"
+        "Speciality": "Especialidad",
+        "Phone": "Celular"
+    },
+    "Sidebar": {
+        "Profile": "Perfil",
+        "Quotes": "Citas",
+        "Inventory": "Inventario",
+        "Community": "comunidad"
+    },
+    "Profile": {
+        "Phone": "Celular",
+        "Fullname": "Nombre completo",
+        "Speciality": "Especialidad",
+        "Email": "Correo Electronico",
+        "DNI": "DNI",
+        "Data": "Editar Datos",
+        "Personal": "Datos Personales",
+        "Save": "Guardar",
+        "Cancel": "Cancelar"
     }
 }

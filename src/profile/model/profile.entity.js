@@ -8,13 +8,13 @@
 * */
 
 export class Profile {
-    constructor({ firstName, lastName, specialty, email, document, phone }) {
+    constructor({ fullname, email, password, speciality, dni, phone }) {
         this.id = 0;
-        this.firstName = firstName || '';
-        this.lastName = lastName || '';
-        this.specialty = specialty || '';
+        this.fullname = fullname || '';
+        this.password = password || '';
+        this.speciality = speciality || '';
+        this.dni = dni || '';
         this.email = email || '';
-        this.document = document || '';
         this.phone = phone || '';
     }
 }

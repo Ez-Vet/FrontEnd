@@ -1,42 +1,43 @@
 <template>
     <div class="card">
         <div class="card-header">
-            <h2 class="title">Datos personales</h2>
+            <h2 class="title">{{ $t('Profile.Personal') }}</h2>
             <button class="edit-button" @click="editProfile">
-                Editar datos <i class="pi pi-pencil"></i>
+                {{ $t('Profile.Data') }}<i class="pi pi-pencil"></i>
             </button>
         </div>
         <div class="card-body">
             <div class="row">
                 <div class="input-group">
-                    <label for="nombre" class="input-label">Nombre completo</label>
+                    <label for="nombre" class="input-label">{{ $t('Profile.Fullname') }}</label>
                     <input type="text" id="nombre" placeholder="Ingresa tu nombre completo" class="input-text"
-                        :value="profile.firstName" :disabled="!isEditing" />
+                        v-model="profile.fullname" :disabled="!isEditing" />
                 </div>
                 <div class="input-group">
-                    <label for="especialidad" class="input-label">Especialidad</label>
+                    <label for="especialidad" class="input-label">{{ $t('Profile.Speciality') }}</label>
                     <input type="text" id="especialidad" placeholder="Ingresa tu especialidad" class="input-text"
-                        :value="profile.specialty" />
+                        v-model="profile.speciality" :disabled="!isEditing" />
                 </div>
                 <div class="input-group">
-                    <label for="correo" class="input-label">Correo electrónico</label>
+                    <label for="correo" class="input-label">{{ $t('Profile.Email') }}</label>
                     <input type="email" id="correo" placeholder="Ingresa tu correo electrónico" class="input-text"
-                        :value="profile.email" />
+                        v-model="profile.email" :disabled="!isEditing" />
                 </div>
                 <div class="input-group">
-                    <label for="dni" class="input-label">DNI</label>
-                    <input type="text" id="dni" placeholder="Ingresa tu DNI" class="input-text"
-                        :value="profile.document" />
+                    <label for="dni" class="input-label">{{ $t('Profile.DNI') }}</label>
+                    <input type="text" id="dni" placeholder="Ingresa tu DNI" class="input-text" v-model="profile.dni"
+                        :disabled="!isEditing" />
                 </div>
                 <div class="input-group">
-                    <label for="celular" class="input-label">Celular</label>
+                    <label for="celular" class="input-label">{{ $t('Profile.Phone') }}</label>
                     <input type="text" id="celular" placeholder="Ingresa tu número de celular" class="input-text"
-                        :value="profile.phone" />
+                        v-model="profile.phone" :disabled="!isEditing" />
                 </div>
 
+
                 <template v-if="isEditing">
-                    <button @click="saveChanges">Guardar</button>
-                    <button @click="cancelEdit">Cancelar</button>
+                    <button @click="saveChanges">{{ $t('Profile.Save') }}</button>
+                    <button @click="cancelEdit">{{ $t('Profile.Cancel') }}</button>
                 </template>
             </div>
         </div>
@@ -64,13 +65,12 @@ export default {
         },
         saveChanges() {
             alert("Cambios guardados");
-            this.api.updateProfileData(this.profile).then();
             this.isEditing = false;
+            this.api.updateProfileData(this.profile).then();
         }
     },
     mounted() {
         this.api.getProfileData().then(user => {
-            localStorage.setItem('ID-USUARIO', 1);
             const data = user.data[0]
 
             this.profile = new Profile(data);
