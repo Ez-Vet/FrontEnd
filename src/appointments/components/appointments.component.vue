@@ -7,7 +7,7 @@
                 <DataTable :value="appointments" class="custom-table" responsiveLayout="scroll" :paginator="true"
                     :rows="5">
                     <!-- Columnas de la tabla -->
-                    <Column header="Foto">
+                    <Column :header="$t('Apointments.Photo')">
                         <template #body="{ data }">
                             <img :src="data.pet.img" :alt="data.pet.name + ' photo'" class="pet-photo"
                                 v-if="data.pet.img" />
@@ -15,31 +15,26 @@
                         </template>
                     </Column>
 
-                    <Column field="pet.name" header="Mascota" />
-                    <Column field="date" header="Fecha" />
-                    <Column field="time" header="Hora" />
-                    <Column header="Estado">
+                    <Column field="pet.name" :header="$t('Apointments.Pet')" />
+                    <Column field="date" :header="$t('Apointments.Date')" />
+                    <Column field="time" :header="$t('Apointments.Time')" />
+                    <Column :header="$t('Apointments.State')">
                         <template #body="{ data }">
                             <div class="edit_status">
-                                <Button @click="cambiarEstado(data)">{{ data.status ? 'Atendido' : 'Pendiente'
+                                <Button @click="cambiarEstado(data)">{{ data.status ? $t('Apointments.completed') :
+                                    $t('Apointments.pending')
                                     }}</Button>
                             </div>
                         </template>
                     </Column>
 
-                    <Column header="Diagnóstico">
-                        <!-- <template #body="slotProps">
-                            <div class="action-buttons">
-                                <Button label="Edit" class="edit-button p-button-sm"
-                                    @click="editarDiagnostico(slotProps.data)" />
-                                <Button label="History" class="history-button p-button-sm ml-2"
-                                    @click="verHistorial(slotProps.data)" />
-                            </div>
-                        </template> -->
+                    <Column :header="$t('Apointments.Diagnostic')">
+
                         <template #body="{ data }">
                             <div class="action-buttons">
-                                <Button label="Edit" class="edit-button p-button-sm" @click="editarDiagnostico(data)" />
-                                <Button label="History" class="history-button p-button-sm ml-2"
+                                <Button :label="$t('Apointments.Edit')" class="edit-button p-button-sm"
+                                    @click="editarDiagnostico(data)" />
+                                <Button :label="$t('Apointments.history')" class="history-button p-button-sm ml-2"
                                     @click="verHistorial(data)" />
                             </div>
                         </template>
@@ -109,7 +104,8 @@
             <p><strong>📅 Observaciones adicionales:</strong></p>
             <textarea v-model="citaSeleccionada.history.observations" rows="2" class="editable-field"></textarea>
         </div>
-        <Button label="Guardar Cambios" class="p-button-success mt-2" @click="guardarDiagnostico(citaSeleccionada)" />
+        <Button :label="$t('Apointments.Save')" class="p-button-success mt-2"
+            @click="guardarDiagnostico(citaSeleccionada)" />
     </Dialog>
 </template>
 
@@ -127,9 +123,11 @@ import Calendar from 'primevue/calendar';
 import Dropdown from 'primevue/dropdown';
 import { AppointmentsApiService } from '../services/appointmentapi.service';
 import { Appointment } from '../model/appointment.entity'
-
+import changelangComponent from "../../public/components/changelang.component.vue";
 export default {
+
     components: {
+        changelangComponent,
         DataTable,
         Column,
         ColumnGroup,
