@@ -81,12 +81,12 @@
     <Dialog header="Historial Clínico" v-model:visible="showHistoryDialog" :modal="true" :closable="true"
         class="custom-dialog">
         <div class="historial-card">
-            <h3>Historial Clínico - Mascota: {{ historialSeleccionado.mascota }}</h3>
-            <p><strong>Propietario:</strong> {{ historialSeleccionado.dueno }}</p>
-            <p><strong>🩺 Motivo de consulta:</strong> {{ historialSeleccionado.motivoConsulta }}</p>
-            <p><strong>📋 Diagnóstico presuntivo:</strong> {{ historialSeleccionado.diagnostico }}</p>
-            <p><strong>💊 Tratamiento:</strong> {{ historialSeleccionado.tratamiento }}</p>
-            <p><strong>📅 Observaciones adicionales:</strong> {{ historialSeleccionado.observaciones }}</p>
+            <h3>Historial Clínico - Mascota: {{ historialSeleccionado.pet.name }}</h3>
+            <p><strong>Propietario:</strong> {{ historialSeleccionado.pet.owner }}</p>
+            <p><strong>🩺 Motivo de consulta:</strong> {{ historialSeleccionado.history.reasonConsultation }}</p>
+            <p><strong>📋 Diagnóstico presuntivo:</strong> {{ historialSeleccionado.history.diagnosis }}</p>
+            <p><strong>💊 Tratamiento:</strong> {{ historialSeleccionado.history.treatment }}</p>
+            <p><strong>📅 Observaciones adicionales:</strong> {{ historialSeleccionado.history.observations }}</p>
         </div>
         <Button label="Cerrar" icon="pi pi-times" class="p-button-danger mt-2" @click="showHistoryDialog = false" />
     </Dialog>
@@ -94,20 +94,20 @@
     <Dialog header="Editar Diagnóstico" v-model:visible="showEditDialog" :modal="true" :closable="true"
         class="custom-dialog">
         <div class="edit-card">
-            <h3>Editar Historial - Mascota: {{ citaSeleccionada.mascota }}</h3>
-            <p><strong>Propietario:</strong> {{ citaSeleccionada.dueno }}</p>
+            <h3>Editar Historial - Mascota: {{ citaSeleccionada.pet.name }}</h3>
+            <p><strong>Propietario:</strong> {{ citaSeleccionada.pet.owner }}</p>
             <hr />
             <p><strong>🩺 Motivo de consulta:</strong></p>
-            <textarea v-model="citaSeleccionada.motivoConsulta" rows="2" class="editable-field"></textarea>
+            <textarea v-model="citaSeleccionada.history.reasonConsultation" rows="2" class="editable-field"></textarea>
 
             <p><strong>📋 Diagnóstico presuntivo:</strong></p>
-            <textarea v-model="citaSeleccionada.diagnostico" rows="2" class="editable-field"></textarea>
+            <textarea v-model="citaSeleccionada.history.diagnosis" rows="2" class="editable-field"></textarea>
 
             <p><strong>💊 Tratamiento:</strong></p>
-            <textarea v-model="citaSeleccionada.tratamiento" rows="2" class="editable-field"></textarea>
+            <textarea v-model="citaSeleccionada.history.treatment" rows="2" class="editable-field"></textarea>
 
             <p><strong>📅 Observaciones adicionales:</strong></p>
-            <textarea v-model="citaSeleccionada.observaciones" rows="2" class="editable-field"></textarea>
+            <textarea v-model="citaSeleccionada.history.observations" rows="2" class="editable-field"></textarea>
         </div>
         <Button label="Guardar Cambios" class="p-button-success mt-2" @click="guardarDiagnostico" />
     </Dialog>
@@ -145,15 +145,6 @@ export default {
         return {
             api: new AppointmentsApiService(),
             appointments: null,
-            selectedAppointment: null
-        }
-    },
-    methods: {
-        verHistorial(data) {
-            const a = new Appointment(data);
-            console.log(a);
-            //this.selectedAppointment = new Appointment(data);
-            showHistoryDialog.value = true;
         }
     },
     setup() {
@@ -257,14 +248,13 @@ export default {
         const citaSeleccionada = ref({});
         const historialSeleccionado = ref({});
 
-        /* const verHistorial = (data) => {
-            const a = new Appointment(data);
-            this.selectedAppointment = new Appointment(data);
+        const verHistorial = (data) => {
+            historialSeleccionado.value = new Appointment(data);
             showHistoryDialog.value = true;
-        }; */
+        };
 
         const editarDiagnostico = (cita) => {
-            citaSeleccionada.value = { ...cita };
+            citaSeleccionada.value = new Appointment(cita);
             showEditDialog.value = true;
         };
 
@@ -291,7 +281,7 @@ export default {
             showEditDialog,
             citaSeleccionada,
             historialSeleccionado,
-            /* verHistorial, */
+            verHistorial,
             editarDiagnostico,
             guardarDiagnostico,
             getImagePath,

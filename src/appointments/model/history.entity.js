@@ -6,7 +6,7 @@
 */
 
 export class History {
-    constructor(diagnosis, reasonConsultation, treatment, observations) {
+    constructor({ diagnosis, reasonConsultation, treatment, observations }) {
         this.diagnosis = diagnosis;
         this.reasonConsultation = reasonConsultation;
         this.treatment = treatment;
