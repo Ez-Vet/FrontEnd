@@ -1,0 +1,56 @@
+{
+    "Access": {
+        "Login": "Log In",
+        "Register": "Register",
+        "Fullname": "Fullname",
+        "uLabel": "enter your username",
+        "Password": "Password",
+        "pLabel": "enter your password",
+        "C_password": "Confirm Password",
+        "cpLabel": "confirm your password",
+        "SignIn": "Sign In",
+        "ToLogin": "Already have an account?",
+        "ToRegister": "create account",
+        "Speciality": "Speciality",
+        "Phone": "Phone"
+    },
+    "Sidebar": {
+        "Profile": "Profile",
+        "Quotes": "Appointments ",
+        "Inventory": "Inventory",
+        "Community": "Community"
+    },
+    "Profile": {
+        "Phone": "Phone",
+        "Fullname": "Fullname",
+        "Speciality": "Speciality",
+        "Email": "Email",
+        "DNI": "DNI",
+        "Data": "Edit Data",
+        "Personal": "Personal Data",
+        "Save": "Save",
+        "Cancel": "Cancel"
+    },
+    "Apointments": {
+        "Photo": "Photo",
+        "Pet": "Pet",
+        "Date": "Date",
+        "Time": "Time",
+        "State": "State",
+        "Diagnostic": "Diagnostic",
+        "Edit": "Edit",
+        "history": "History",
+        "Save": "Save",
+        "pending": "Pending",
+        "completed": "Completed",
+        "historyclinic": "Clinical History",
+        "history_clinic": "Clinical History - Pet:",
+        "reasonConsultation": "Reason for Consultation:",
+        "Propiertary": "Propiertary:",
+        "Diagnostic_presumptive": "Presumptive Diagnosis:",
+        "treatment": "Treatment:",
+        "observations": "Additional Observations:",
+        "Close": "Close",
+        "edithistory": "Edit History"
+    }
+}

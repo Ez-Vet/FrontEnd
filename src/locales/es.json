@@ -1,0 +1,56 @@
+{
+    "Access": {
+        "Login": "Iniciar Sesión",
+        "Register": "Registrarse",
+        "Fullname": "Nombre completo",
+        "uLabel": "ingresa tu nombre de usuario",
+        "Password": "Contraseña",
+        "pLabel": "ingresa tu contraseña",
+        "C_password": "Confirmar Contraseña",
+        "cpLabel": "confirma tu contraseña",
+        "SignIn": "Registrarse",
+        "ToLogin": "¿Ya tienes una cuenta?",
+        "ToRegister": "Crear cuenta",
+        "Speciality": "Especialidad",
+        "Phone": "Celular"
+    },
+    "Sidebar": {
+        "Profile": "Perfil",
+        "Quotes": "Citas",
+        "Inventory": "Inventario",
+        "Community": "comunidad"
+    },
+    "Profile": {
+        "Phone": "Celular",
+        "Fullname": "Nombre completo",
+        "Speciality": "Especialidad",
+        "Email": "Correo Electronico",
+        "DNI": "DNI",
+        "Data": "Editar Datos",
+        "Personal": "Datos Personales",
+        "Save": "Guardar",
+        "Cancel": "Cancelar"
+    },
+    "Apointments": {
+        "Photo": "Foto",
+        "Pet": "Mascota",
+        "Date": "Fecha",
+        "Time": "Hora",
+        "State": "Estado",
+        "Diagnostic": "Diagnóstico",
+        "Edit": "Editar",
+        "history": "Historial",
+        "Save": "Guardar",
+        "pending": "Pendiente",
+        "completed": "Completado",
+        "historyclinic": "Historial Clínico",
+        "history_clinic": "Historial Clínico - Mascota:",
+        "reasonConsultation": "Motivo de Consulta:",
+        "Propiertary": "Propietario:",
+        "Diagnostic_presumptive": "Diagnóstico Presuntivo:",
+        "treatment": "Tratamiento:",
+        "observations": "Observaciones Adicionales:",
+        "Close": "Cerrar",
+        "edithistory": "Editar Historial"
+    }
+}
