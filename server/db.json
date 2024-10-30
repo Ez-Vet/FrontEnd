@@ -5,15 +5,15 @@
       "pet": {
         "name": "Firulais",
         "owner": "Juan Pérez",
-        "img": "/img//img//img/firulais.jpg"
+        "img": "firulais.jpg"
       },
       "date": "2024-10-20",
       "time": "10:00",
       "status": false,
       "history": {
-        "diagnosis": "le falla el cerebro",
+        "diagnosis": "Gastritis",
         "reasonConsultation": "Vómitos ocasionales, pérdida de apetito",
-        "treatment": "ver tiktoks",
+        "treatment": "Dieta blanda, pastillas y mucho amor",
         "observations": "Monitorear signos de empeoramiento."
       }
     },
@@ -22,7 +22,7 @@
       "pet": {
         "name": "Max",
         "owner": "María López",
-        "img": "/img/max.jpg"
+        "img": "max.jpg"
       },
       "date": "2024-11-02",
       "time": "12:00",
@@ -56,7 +56,7 @@
       "pet": {
         "name": "Rocky",
         "owner": "Luis Fernández",
-        "img": "/img/rocky.jpg"
+        "img": "rocky.jpg"
       },
       "date": "2024-11-10",
       "time": "09:30",
@@ -73,7 +73,7 @@
       "pet": {
         "name": "Bella",
         "owner": "Ana Torres",
-        "img": "/img/bella.jpg"
+        "img": "bella.jpg"
       },
       "date": "2024-11-15",
       "time": "11:00",
@@ -129,7 +129,7 @@
       "fullname": "Diego Bastidas",
       "password": "Hola123",
       "speciality": "Groomer",
-      "dni": "1",
+      "dni": "453212365",
       "email": "diego@correo.com",
       "phone": "980552320"
     },

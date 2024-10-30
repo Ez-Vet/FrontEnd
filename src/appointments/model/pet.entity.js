@@ -8,6 +8,6 @@ export class Pet {
     constructor({ name, owner, img }) {
         this.name = name;
         this.owner = owner;
-        this.img = '/img/' + img;
+        this.img = img;
     }
 }

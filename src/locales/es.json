@@ -40,15 +40,17 @@
         "Diagnostic": "Diagnóstico",
         "Edit": "Editar",
         "history": "Historial",
-        "Add": "Agregar Cita",
-        "Delete": "Eliminar",
         "Save": "Guardar",
         "pending": "Pendiente",
         "completed": "Completado",
-        "reasonConsultation": "Motivo de Consulta",
-        "Diagnostic_presumptive": "Diagnóstico Presuntivo",
-        "treatment": "Tratamiento",
-        "observations": "Observaciones",
-        "edit_history": "Editar Historial - Mascota"
+        "historyclinic": "Historial Clínico",
+        "history_clinic": "Historial Clínico - Mascota:",
+        "reasonConsultation": "Motivo de Consulta:",
+        "Propiertary": "Propietario:",
+        "Diagnostic_presumptive": "Diagnóstico Presuntivo:",
+        "treatment": "Tratamiento:",
+        "observations": "Observaciones Adicionales:",
+        "Close": "Cerrar",
+        "edithistory": "Editar Historial"
     }
 }

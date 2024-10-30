@@ -36,8 +36,8 @@
 
 
                 <template v-if="isEditing">
-                    <button @click="saveChanges">{{ $t('Profile.Save') }}</button>
-                    <button @click="cancelEdit">{{ $t('Profile.Cancel') }}</button>
+                    <pv-button @click="saveChanges">{{ $t('Profile.Save') }}</pv-button>
+                    <pv-button @click="cancelEdit">{{ $t('Profile.Cancel') }}</pv-button>
                 </template>
             </div>
         </div>

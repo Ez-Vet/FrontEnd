@@ -40,15 +40,17 @@
         "Diagnostic": "Diagnostic",
         "Edit": "Edit",
         "history": "History",
-        "Add": "Add Appointment",
-        "Delete": "Delete",
         "Save": "Save",
         "pending": "Pending",
         "completed": "Completed",
-        "reasonConsultation": "Reason for Consultation",
-        "Diagnostic_presumptive": "Presumptive Diagnosis",
-        "treatment": "Treatment",
-        "observations": "Observations",
-        "edit_history": "Edit History - Pet"
+        "historyclinic": "Clinical History",
+        "history_clinic": "Clinical History - Pet:",
+        "reasonConsultation": "Reason for Consultation:",
+        "Propiertary": "Propiertary:",
+        "Diagnostic_presumptive": "Presumptive Diagnosis:",
+        "treatment": "Treatment:",
+        "observations": "Additional Observations:",
+        "Close": "Close",
+        "edithistory": "Edit History"
     }
 }

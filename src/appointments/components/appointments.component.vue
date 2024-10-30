@@ -9,7 +9,7 @@
                     <!-- Columnas de la tabla -->
                     <Column :header="$t('Apointments.Photo')">
                         <template #body="{ data }">
-                            <img :src="data.pet.img" :alt="data.pet.name + ' photo'" class="pet-photo"
+                            <img :src="'/img/' + data.pet.img" :alt="data.pet.name + ' photo'" class="pet-photo"
                                 v-if="data.pet.img" />
                             <span v-else>No image</span>
                         </template>
@@ -73,35 +73,41 @@
     </div>
 
     <!-- Modal para ver y editar el historial -->
-    <Dialog header="Historial Clínico" v-model:visible="showHistoryDialog" :modal="true" :closable="true"
+    <Dialog :header="$t('Apointments.historyclinic')" v-model:visible="showHistoryDialog" :modal="true" :closable="true"
         class="custom-dialog">
         <div class="historial-card">
-            <h3>Historial Clínico - Mascota: {{ historialSeleccionado.pet.name }}</h3>
-            <p><strong>Propietario:</strong> {{ historialSeleccionado.pet.owner }}</p>
-            <p><strong>🩺 Motivo de consulta:</strong> {{ historialSeleccionado.history.reasonConsultation }}</p>
-            <p><strong>📋 Diagnóstico presuntivo:</strong> {{ historialSeleccionado.history.diagnosis }}</p>
-            <p><strong>💊 Tratamiento:</strong> {{ historialSeleccionado.history.treatment }}</p>
-            <p><strong>📅 Observaciones adicionales:</strong> {{ historialSeleccionado.history.observations }}</p>
+            <h3>{{ $t('Apointments.history_clinic') }} {{ historialSeleccionado.pet.name }}</h3>
+            <p><strong>{{ $t('Apointments.Propiertary') }}</strong> {{ historialSeleccionado.pet.owner }}</p>
+            <p><strong>🩺 {{ $t('Apointments.reasonConsultation') }}</strong> {{
+                historialSeleccionado.history.reasonConsultation }}</p>
+            <p><strong>📋 {{ $t('Apointments.Diagnostic_presumptive') }}</strong> {{
+                historialSeleccionado.history.diagnosis
+            }}
+            </p>
+            <p><strong>💊 {{ $t('Apointments.treatment') }}</strong> {{ historialSeleccionado.history.treatment }}</p>
+            <p><strong>📅 {{ $t('Apointments.observations') }}</strong> {{ historialSeleccionado.history.observations }}
+            </p>
         </div>
-        <Button label="Cerrar" icon="pi pi-times" class="p-button-danger mt-2" @click="showHistoryDialog = false" />
+        <Button :label="$t('Apointments.Close')" icon="pi pi-times" class="p-button-danger mt-2"
+            @click="showHistoryDialog = false" />
     </Dialog>
 
-    <Dialog header="Editar Diagnóstico" v-model:visible="showEditDialog" :modal="true" :closable="true"
+    <Dialog :header="$t('Apointments.edithistory')" v-model:visible="showEditDialog" :modal="true" :closable="true"
         class="custom-dialog">
         <div class="edit-card">
-            <h3>Editar Historial - Mascota: {{ citaSeleccionada.pet.name }}</h3>
-            <p><strong>Propietario:</strong> {{ citaSeleccionada.pet.owner }}</p>
+            <h3>{{ $t('Apointments.history_clinic') }} {{ citaSeleccionada.pet.name }}</h3>
+            <p><strong>{{ $t('Apointments.Propiertary') }}</strong> {{ citaSeleccionada.pet.owner }}</p>
             <hr />
-            <p><strong>🩺 Motivo de consulta:</strong></p>
+            <p><strong>🩺 {{ $t('Apointments.reasonConsultation') }}</strong></p>
             <textarea v-model="citaSeleccionada.history.reasonConsultation" rows="2" class="editable-field"></textarea>
 
-            <p><strong>📋 Diagnóstico presuntivo:</strong></p>
+            <p><strong>📋 {{ $t('Apointments.Diagnostic_presumptive') }}</strong></p>
             <textarea v-model="citaSeleccionada.history.diagnosis" rows="2" class="editable-field"></textarea>
 
-            <p><strong>💊 Tratamiento:</strong></p>
+            <p><strong>💊 {{ $t('Apointments.treatment') }}</strong></p>
             <textarea v-model="citaSeleccionada.history.treatment" rows="2" class="editable-field"></textarea>
 
-            <p><strong>📅 Observaciones adicionales:</strong></p>
+            <p><strong>📅 {{ $t('Apointments.observations') }}</strong></p>
             <textarea v-model="citaSeleccionada.history.observations" rows="2" class="editable-field"></textarea>
         </div>
         <Button :label="$t('Apointments.Save')" class="p-button-success mt-2"
@@ -261,6 +267,7 @@ export default {
             api.value.updateAppointment(cita).then((response) => {
                 console.log(response);
                 showEditDialog.value = false;
+                location.reload();
             });
         };
         const cambiarEstado = (cita) => {
@@ -425,12 +432,19 @@ export default {
     max-width: 100%;
 }
 
+
+
 .historial-card,
 .edit-card {
-    padding: 20px;
+    padding: 80px;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.edit-card {
+    width: 500px;
+    padding: 0;
 }
 
 .editable-field {
