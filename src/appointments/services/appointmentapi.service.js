@@ -8,4 +8,7 @@ export class AppointmentsApiService {
     getAppointments() {
         return http.get(`${this.endpoint}`);
     }
+    updateAppointment(data) {
+        return http.put(`${this.endpoint}/${data.id}`, data);
+    }
 }

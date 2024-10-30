@@ -9,11 +9,11 @@
       },
       "date": "2024-10-20",
       "time": "10:00",
-      "status": "Pendiente",
+      "status": false,
       "history": {
-        "diagnosis": "Problemas de estómago",
+        "diagnosis": "le falla el cerebro",
         "reasonConsultation": "Vómitos ocasionales, pérdida de apetito",
-        "treatment": "Dieta blanda por 48 horas",
+        "treatment": "ver tiktoks",
         "observations": "Monitorear signos de empeoramiento."
       }
     },
@@ -26,14 +26,14 @@
       },
       "date": "2024-11-02",
       "time": "12:00",
-      "status": "Atendido",
+      "status": 1,
       "history": {
         "diagnosis": "Problemas de piel",
         "reasonConsultation": "Rascarse excesivamente",
         "treatment": "Crema tópica antihistamínica",
         "observations": "Revisar en 1 semana."
       }
-    },e 
+    },
     {
       "id": 3,
       "pet": {
@@ -43,7 +43,7 @@
       },
       "date": "2024-10-25",
       "time": "14:00",
-      "status": "Pendiente",
+      "status": 0,
       "history": {
         "diagnosis": "Dolor en las articulaciones",
         "reasonConsultation": "Dificultad para caminar y saltar",

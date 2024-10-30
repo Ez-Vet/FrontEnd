@@ -1,12 +1,5 @@
 <template>
     <div class="main-content">
-        <!-- Search bar y botón "Add new" alineados a la derecha -->
-        <div class="search-bar">
-            <InputText v-model="searchQuery" placeholder="Search pets" class="search-input" />
-            <Button label="Search" icon="pi pi-search" class="p-button-outlined search-button" />
-            <Button label="Add new" icon="pi pi-plus" class="p-button-success add-button" />
-        </div>
-
         <!-- Filtros y Tabla -->
         <div class="content-wrapper">
             <!-- Tabla de citas con fotos -->
@@ -25,7 +18,14 @@
                     <Column field="pet.name" header="Mascota" />
                     <Column field="date" header="Fecha" />
                     <Column field="time" header="Hora" />
-                    <Column field="status" header="Estado" />
+                    <Column header="Estado">
+                        <template #body="{ data }">
+                            <div class="edit_status">
+                                <Button @click="cambiarEstado(data)">{{ data.status ? 'Atendido' : 'Pendiente'
+                                    }}</Button>
+                            </div>
+                        </template>
+                    </Column>
 
                     <Column header="Diagnóstico">
                         <!-- <template #body="slotProps">
@@ -109,7 +109,7 @@
             <p><strong>📅 Observaciones adicionales:</strong></p>
             <textarea v-model="citaSeleccionada.history.observations" rows="2" class="editable-field"></textarea>
         </div>
-        <Button label="Guardar Cambios" class="p-button-success mt-2" @click="guardarDiagnostico" />
+        <Button label="Guardar Cambios" class="p-button-success mt-2" @click="guardarDiagnostico(citaSeleccionada)" />
     </Dialog>
 </template>
 
@@ -148,50 +148,51 @@ export default {
         }
     },
     setup() {
-        const citas = ref([
-            {
-                mascota: 'Firulais',
-                fecha: '2024-10-20',
-                hora: '10:00',
-                estado: 'Pendiente',
-                diagnostico: 'Problemas de estómago',
-                motivoConsulta: 'Vómitos ocasionales, pérdida de apetito',
-                tratamiento: 'Dieta blanda por 48 horas',
-                observaciones: 'Monitorear signos de empeoramiento.',
-                dueno: 'Juan Pérez',
-                image: 'firulais.jpg'
-            },
-            {
-                mascota: 'Max',
-                fecha: '2024-11-02',
-                hora: '12:00',
-                estado: 'Atendido',
-                diagnostico: 'Problemas de piel',
-                motivoConsulta: 'Rascarse excesivamente',
-                tratamiento: 'Crema tópica antihistamínica',
-                observaciones: 'Revisar en 1 semana.',
-                dueno: 'María López',
-                image: 'max.jpg'
-            },
-            {
-                mascota: 'Luna',
-                fecha: '2024-10-25',
-                hora: '14:00',
-                estado: 'Pendiente',
-                diagnostico: 'Dolor en las articulaciones',
-                motivoConsulta: 'Dificultad para caminar y saltar',
-                tratamiento: 'Antiinflamatorio no esteroideo (meloxicam)',
-                observaciones: 'Control en 1 mes.',
-                dueno: 'Carlos Sánchez',
-                image: 'luna.jpg'
-            }
-        ]);
+        /*   const citas = ref([
+              {
+                  mascota: 'Firulais',
+                  fecha: '2024-10-20',
+                  hora: '10:00',
+                  estado: 'Pendiente',
+                  diagnostico: 'Problemas de estómago',
+                  motivoConsulta: 'Vómitos ocasionales, pérdida de apetito',
+                  tratamiento: 'Dieta blanda por 48 horas',
+                  observaciones: 'Monitorear signos de empeoramiento.',
+                  dueno: 'Juan Pérez',
+                  image: 'firulais.jpg'
+              },
+              {
+                  mascota: 'Max',
+                  fecha: '2024-11-02',
+                  hora: '12:00',
+                  estado: 'Atendido',
+                  diagnostico: 'Problemas de piel',
+                  motivoConsulta: 'Rascarse excesivamente',
+                  tratamiento: 'Crema tópica antihistamínica',
+                  observaciones: 'Revisar en 1 semana.',
+                  dueno: 'María López',
+                  image: 'max.jpg'
+              },
+              {
+                  mascota: 'Luna',
+                  fecha: '2024-10-25',
+                  hora: '14:00',
+                  estado: 'Pendiente',
+                  diagnostico: 'Dolor en las articulaciones',
+                  motivoConsulta: 'Dificultad para caminar y saltar',
+                  tratamiento: 'Antiinflamatorio no esteroideo (meloxicam)',
+                  observaciones: 'Control en 1 mes.',
+                  dueno: 'Carlos Sánchez',
+                  image: 'luna.jpg'
+              }
+          ]); */
 
         const searchQuery = ref('');
         const selectedMascota = ref(null);
         const selectedDate = ref(null);
         const selectedEstado = ref(null);
         const selectedDueno = ref(null);
+        const api = ref(new AppointmentsApiService());
 
         // Añadir opción "Todos" en el estado
         const estados = ref([{ estado: 'Todos' }, { estado: 'Pendiente' }, { estado: 'Atendido' }]);
@@ -228,7 +229,7 @@ export default {
         const filteredDuenos = ref([]);
 
         const filterMascota = (event) => {
-            filteredMascotas.value = citas.value
+            filteredMascotas.value = this.appointment
                 .map((cita) => cita.mascota)
                 .filter((mascota) =>
                     mascota.toLowerCase().includes(event.query.toLowerCase())
@@ -258,14 +259,19 @@ export default {
             showEditDialog.value = true;
         };
 
-        const guardarDiagnostico = () => {
-            const index = citas.value.findIndex((c) => c.mascota === citaSeleccionada.value.mascota);
-            if (index !== -1) {
-                citas.value[index] = { ...citaSeleccionada.value };
-            }
-            showEditDialog.value = false;
+        const guardarDiagnostico = (cita) => {
+            api.value.updateAppointment(cita).then((response) => {
+                console.log(response);
+                showEditDialog.value = false;
+            });
         };
+        const cambiarEstado = (cita) => {
+            cita.status = !cita.status;
 
+            api.value.updateAppointment(cita).then((response) => {
+                console.log(response);
+            });
+        };
         const getImagePath = (imageName) => {
             if (imageName) {
                 return new URL(`../assets/img/${imageName}`, import.meta.url).href;
@@ -274,7 +280,7 @@ export default {
         };
 
         return {
-            citas,
+            /* citas, */
             searchQuery,
             filteredCitas,
             showHistoryDialog,
@@ -293,7 +299,9 @@ export default {
             filteredDuenos,
             estados,
             filterMascota,
-            filterDueno
+            filterDueno,
+            api,
+            cambiarEstado
         };
     },
     mounted() {
@@ -438,5 +446,17 @@ export default {
 
 .mt-2 {
     margin-top: 15px;
+}
+
+.edit_status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 150px;
+    margin-right: -80px;
+
+    button {
+        background-color: #7776bc;
+    }
 }
 </style>
