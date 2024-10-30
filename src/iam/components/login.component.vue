@@ -4,49 +4,42 @@ import changelangComponent from "../../public/components/changelang.component.vu
 
 export default {
   name: "login.vue",
-  components: {changelangComponent},
-  data(){
+  components: { changelangComponent },
+  data() {
     return {
       users: null,
-      username: '',
+      email: '',
       password: '',
       errorMessage: null,
+      api: new AuthApiService()
     }
   },
-  created(){
-    this.getData();
-  },
-  methods:{
-    goToRegister(){
+  methods: {
+    goToRegister() {
       this.$router.push('/register');
     },
-    getData(){
-      AuthApiService.getData().then((users)=>{
-        this.users = users;
-      });
+    login() {
 
-    },
-    login(){
-
-      if (!this.username || !this.password) {
+      if (!this.email || !this.password) {
         this.errorMessage = "Please, enter your username and password";
         return;
       }
 
-      console.log(this.username + " " + this.password);
-      AuthApiService.login(this.username, this.password)
-          .then((response) => {
-            if (response.success) {
+      console.log(this.email + " " + this.password);
+      this.api.login(this.email, this.password)
+        .then((response) => {
+          const data = response.data;
 
-              this.$router.push('/home');
-            } else {
-
-              this.errorMessage = "username or password is incorrect";
-            }
-          })
-          .catch((error) => {
-            this.errorMessage = "problem with the authentication" + error.message;
-          });
+          if (data.length > 0) {
+            alert('Login successful.')
+            this.$router.push('/profile');
+          }
+          else
+            this.errorMessage = "username or password is incorrect";
+        })
+        .catch((error) => {
+          this.errorMessage = "problem with the authentication" + error.message;
+        });
     }
   },
 
@@ -55,7 +48,7 @@ export default {
 </script>
 
 <template>
-  <pv-toolbar  class="w-full fixed top-0 left-0 flex items-center justify-between p-4">
+  <pv-toolbar class="w-full fixed top-0 left-0 flex items-center justify-between p-4">
     <template #end>
 
       <changelangComponent></changelangComponent>
@@ -67,22 +60,22 @@ export default {
       <div>
         <div class="flex flex-col items-center justify-center">
           <pv-image src="img/ezvet.png" width="190px"></pv-image>
-          <h1 class="mt-8 mb-8 text-center" style="font-size: 50px">{{$t('Access.Login')}}</h1>
+          <h1 class="mt-8 mb-8 text-center" style="font-size: 50px">{{ $t('Access.Login') }}</h1>
         </div>
         <div class="flex flex-col gap-3">
-          <label for="username" class="text-left">{{$t('Access.Username')}}</label>
-          <pv-inputtext id="username" class="custom-input" v-model="username" type="text" size="small"
-                        placeholder="enter your username"/>
+          <label for="username" class="text-left">{{ $t('Access.Username') }}</label>
+          <pv-inputtext id="username" class="custom-input" v-model="email" type="text" size="small"
+            placeholder="enter your username" />
 
-          <label for="password" class="text-left">{{$t('Access.Password')}}</label>
+          <label for="password" class="text-left">{{ $t('Access.Password') }}</label>
           <pv-inputtext type="password" id="password" class="custom-input" v-model="password" size="small" toggleMask
-                        placeholder="enter your password"/>
+            placeholder="enter your password" />
 
           <!-- Mostrar mensaje de error si lo hay -->
           <div v-if="errorMessage" class="text-red-500">{{ errorMessage }}</div>
 
-          <pv-button class="mt-4 button" @click="login">{{$t('Access.Login')}}</pv-button>
-          <a class="underline cursor-pointer text-1xl" @click="goToRegister">{{$t('Access.ToRegister')}}</a>
+          <pv-button class="mt-4 button" @click="login">{{ $t('Access.Login') }}</pv-button>
+          <a class="underline cursor-pointer text-1xl" @click="goToRegister">{{ $t('Access.ToRegister') }}</a>
         </div>
       </div>
     </div>
@@ -91,7 +84,6 @@ export default {
 </template>
 
 <style scoped>
-
 .custom-input {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -104,6 +96,7 @@ export default {
   transition: background-color 0.3s ease, border-color 0.3s ease;
   color: mediumpurple;
 }
+
 
 .button {
   border-radius: 8px;
@@ -125,5 +118,6 @@ export default {
 
 
 }
-
 </style>
+
+<style></style>

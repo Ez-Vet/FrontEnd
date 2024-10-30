@@ -21,7 +21,7 @@ export default {
                 <button class="button">
                     <!-- <i class="pi pi-user"></i> -->
                     <img src="/img/user-icon.png">
-                    Perfil
+                    {{ $t('Sidebar.Profile') }}
                 </button>
             </RouterLink>
 
@@ -29,18 +29,18 @@ export default {
                 <button class="button">
                     <!-- <i class="pi pi-address-book"></i> -->
                     <img src="/img/book-icon.png">
-                    Citas
+                    {{ $t('Sidebar.Quotes') }}
                 </button>
             </RouterLink>
 
             <button class="button">
                 <img src="/img/pet-icon.png">
-                Inventario
+                {{ $t('Sidebar.Inventory') }}
             </button>
 
             <button class="button">
                 <img src="/img/people-icon.png">
-                Comunidad
+                {{ $t('Sidebar.Community') }}
             </button>
         </div>
     </div>

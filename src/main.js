@@ -10,10 +10,15 @@ import Toolbar from "primevue/toolbar";
 import Image from "primevue/image";
 import ToggleButton from 'primevue/togglebutton';
 import 'primeicons/primeicons.css';
+import router from './routes/index.js';
+import Popover from 'primevue/popover';
+import Divider from 'primevue/divider';
+
+
 const app = createApp(App);
 
 app.use(i18n);
-
+app.use(router);
 app.use(PrimeVue, {
     theme: {
         preset: Aura,
@@ -30,6 +35,8 @@ app.component("pv-toolbar", Toolbar);
 app.component("pv-image", Image);
 app.component("pv-inputtext", InputText);
 app.component("pv-button", Button);
-app.component("pv-togglebutton", ToggleButton)
+app.component("pv-togglebutton", ToggleButton);
+app.component("pv-popover", Popover);
+app.component("pv-divider", Divider);
 
 app.mount('#app');

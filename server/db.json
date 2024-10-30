@@ -1,0 +1,123 @@
+{
+  "appointments": [
+    {
+      "id": 1,
+      "pet": {
+        "name": "Firulais",
+        "owner": "Juan Pérez",
+        "img": "firulais.jpg"
+      },
+      "date": "2024-10-20",
+      "time": "10:00",
+      "status": false,
+      "history": {
+        "diagnosis": "le falla el cerebro",
+        "reasonConsultation": "Vómitos ocasionales, pérdida de apetito",
+        "treatment": "ver tiktoks",
+        "observations": "Monitorear signos de empeoramiento."
+      }
+    },
+    {
+      "id": 2,
+      "pet": {
+        "name": "Max",
+        "owner": "María López",
+        "img": "max.jpg"
+      },
+      "date": "2024-11-02",
+      "time": "12:00",
+      "status": 1,
+      "history": {
+        "diagnosis": "Problemas de piel",
+        "reasonConsultation": "Rascarse excesivamente",
+        "treatment": "Crema tópica antihistamínica",
+        "observations": "Revisar en 1 semana."
+      }
+    },
+    {
+      "id": 3,
+      "pet": {
+        "name": "Luna",
+        "owner": "Carlos Sánchez",
+        "img": "luna.jpg"
+      },
+      "date": "2024-10-25",
+      "time": "14:00",
+      "status": 0,
+      "history": {
+        "diagnosis": "Dolor en las articulaciones",
+        "reasonConsultation": "Dificultad para caminar y saltar",
+        "treatment": "Antiinflamatorio no esteroideo (meloxicam)",
+        "observations": "Control en 1 mes."
+      }
+    }
+  ],
+  "notifications": [
+    {
+      "id": 1,
+      "description": "Notification 1",
+      "date": "2024-12-12",
+      "time": "15:00"
+    },
+    {
+      "id": 2,
+      "description": "Notification 2",
+      "date": "2024-12-12",
+      "time": "15:00"
+    },
+    {
+      "id": 3,
+      "description": "Notification 3",
+      "date": "2024-12-12",
+      "time": "15:00"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "fullname": "estrellita la mas capita",
+      "password": "contraseña",
+      "speciality": "la mas especial",
+      "dni": "1",
+      "email": "juisjuas@gaa.com",
+      "phone": "no tengo :c"
+    },
+    {
+      "username": "1",
+      "password": "4",
+      "email": "2",
+      "tuition": "3",
+      "id": 2
+    },
+    {
+      "username": "123",
+      "password": "ewgw",
+      "email": "1324",
+      "tuition": "1523",
+      "id": 3
+    },
+    {
+      "username": "asdasd",
+      "password": "asdasd",
+      "email": "asdsad",
+      "speciality": "asdasd",
+      "id": 4
+    },
+    {
+      "fullname": "nombre",
+      "password": "contraseña",
+      "email": "correo",
+      "speciality": "especialidad",
+      "id": 5
+    },
+    {
+      "fullname": "nombre",
+      "password": "contraseña",
+      "email": "correo",
+      "speciality": "especialidad",
+      "dni": "dni",
+      "phone": "celular",
+      "id": 6
+    }
+  ]
+}

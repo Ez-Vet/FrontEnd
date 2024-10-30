@@ -1,15 +1,8 @@
-import axios from 'axios';
-
-const http = axios.create({
-    'baseURL': "http://localhost:3000"
-});
-
-http.defaults.headers.common['Content-Type'] = 'application/json';
-http.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+import http from '../../shared/services/http-common'
 
 export class ProfileApi {
     constructor() {
-        this.endpoint = '/profiles';
+        this.endpoint = '/users';
     }
 
     getProfileData() {

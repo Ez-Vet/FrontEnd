@@ -1,21 +1,8 @@
-<script >
-import SidebarComponent from './public/components/sidebar.component.vue';
-
-export default {
-  components: {SidebarComponent}
-}
-
-
+<script>
 </script>
 
 <template>
-    <SidebarComponent></SidebarComponent>
-    
+  <router-view />
 </template>
 
-<style scoped>
-#app{
-    display: flex;
-    min-height: 100vh;
-}
-</style>
+<style scoped></style>
