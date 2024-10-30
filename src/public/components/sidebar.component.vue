@@ -33,10 +33,12 @@ export default {
                 </button>
             </RouterLink>
 
-            <button class="button">
-                <img src="/img/pet-icon.png">
-                {{ $t('Sidebar.Inventory') }}
-            </button>
+            <RouterLink to="/inventory">
+                <button class="button">
+                    <img src="/img/pet-icon.png">
+                    {{ $t('Sidebar.Inventory') }}
+                </button>
+            </RouterLink>
 
             <button class="button">
                 <img src="/img/people-icon.png">

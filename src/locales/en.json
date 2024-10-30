@@ -30,5 +30,27 @@
         "Personal": "Personal Data",
         "Save": "Save",
         "Cancel": "Cancel"
+    },
+    "Apointments": {
+        "Photo": "Photo",
+        "Pet": "Pet",
+        "Date": "Date",
+        "Time": "Time",
+        "State": "State",
+        "Diagnostic": "Diagnostic",
+        "Edit": "Edit",
+        "history": "History",
+        "Save": "Save",
+        "pending": "Pending",
+        "completed": "Completed",
+        "historyclinic": "Clinical History",
+        "history_clinic": "Clinical History - Pet:",
+        "reasonConsultation": "Reason for Consultation:",
+        "Propiertary": "Propiertary:",
+        "Diagnostic_presumptive": "Presumptive Diagnosis:",
+        "treatment": "Treatment:",
+        "observations": "Additional Observations:",
+        "Close": "Close",
+        "edithistory": "Edit History"
     }
 }

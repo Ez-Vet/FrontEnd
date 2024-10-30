@@ -11,9 +11,9 @@
       "time": "10:00",
       "status": false,
       "history": {
-        "diagnosis": "le falla el cerebro",
+        "diagnosis": "Gastritis",
         "reasonConsultation": "Vómitos ocasionales, pérdida de apetito",
-        "treatment": "ver tiktoks",
+        "treatment": "Dieta blanda, pastillas y mucho amor",
         "observations": "Monitorear signos de empeoramiento."
       }
     },
@@ -26,7 +26,7 @@
       },
       "date": "2024-11-02",
       "time": "12:00",
-      "status": 1,
+      "status": false,
       "history": {
         "diagnosis": "Problemas de piel",
         "reasonConsultation": "Rascarse excesivamente",
@@ -48,6 +48,57 @@
         "diagnosis": "Dolor en las articulaciones",
         "reasonConsultation": "Dificultad para caminar y saltar",
         "treatment": "Antiinflamatorio no esteroideo (meloxicam)",
+        "observations": "Control en 1 mes."
+      }
+    },
+    {
+      "id": 4,
+      "pet": {
+        "name": "Rocky",
+        "owner": "Luis Fernández",
+        "img": "rocky.jpg"
+      },
+      "date": "2024-11-10",
+      "time": "09:30",
+      "status": false,
+      "history": {
+        "diagnosis": "Infección en oído",
+        "reasonConsultation": "Saca líquido del oído",
+        "treatment": "Gotas antibióticas",
+        "observations": "Evaluar en 5 días."
+      }
+    },
+    {
+      "id": 5,
+      "pet": {
+        "name": "Bella",
+        "owner": "Ana Torres",
+        "img": "bella.jpg"
+      },
+      "date": "2024-11-15",
+      "time": "11:00",
+      "status": true,
+      "history": {
+        "diagnosis": "Gastroenteritis",
+        "reasonConsultation": "Diarrea y vómitos",
+        "treatment": "Suero y dieta blanda",
+        "observations": "Revisar en 2 semanas."
+      }
+    },
+    {
+      "id": 6,
+      "pet": {
+        "name": "Milo",
+        "owner": "Raúl López",
+        "img": "milo.jpg"
+      },
+      "date": "2024-12-01",
+      "time": "16:00",
+      "status": false,
+      "history": {
+        "diagnosis": "Anemia",
+        "reasonConsultation": "Letargo y encías pálidas",
+        "treatment": "Suplemento de hierro y dieta rica en proteínas",
         "observations": "Control en 1 mes."
       }
     }
@@ -75,49 +126,131 @@
   "users": [
     {
       "id": 1,
-      "fullname": "estrellita la mas capita",
-      "password": "contraseña",
-      "speciality": "la mas especial",
-      "dni": "1",
-      "email": "juisjuas@gaa.com",
-      "phone": "no tengo :c"
+      "fullname": "Diego Bastidas",
+      "password": "Hola123",
+      "speciality": "Groomer",
+      "dni": "453212365",
+      "email": "diego@correo.com",
+      "phone": "980552320"
     },
     {
-      "username": "1",
-      "password": "4",
-      "email": "2",
-      "tuition": "3",
-      "id": 2
+      "id": 2,
+      "fullname": "Carlos Rojas",
+      "password": "password123",
+      "speciality": "Medicina Interna",
+      "dni": "12345678",
+      "email": "carlosr@correo.com",
+      "phone": "987654321"
     },
     {
-      "username": "123",
-      "password": "ewgw",
-      "email": "1324",
-      "tuition": "1523",
-      "id": 3
+      "id": 3,
+      "fullname": "María García",
+      "password": "securepass",
+      "speciality": "Dermatología",
+      "dni": "87654321",
+      "email": "mariag@correo.com",
+      "phone": "912345678"
     },
     {
-      "username": "asdasd",
-      "password": "asdasd",
-      "email": "asdsad",
-      "speciality": "asdasd",
-      "id": 4
+      "id": 4,
+      "fullname": "José Martínez",
+      "password": "passw0rd",
+      "speciality": "Cirugía",
+      "dni": "45612378",
+      "email": "josem@correo.com",
+      "phone": "934567890"
     },
     {
-      "fullname": "nombre",
-      "password": "contraseña",
-      "email": "correo",
-      "speciality": "especialidad",
-      "id": 5
+      "id": 5,
+      "fullname": "Lucía Sánchez",
+      "password": "mypassword",
+      "speciality": "Odontología",
+      "dni": "78945612",
+      "email": "lucias@correo.com",
+      "phone": "956789012"
     },
     {
-      "fullname": "nombre",
-      "password": "contraseña",
-      "email": "correo",
-      "speciality": "especialidad",
-      "dni": "dni",
-      "phone": "celular",
-      "id": 6
+      "id": 6,
+      "fullname": "Raúl López",
+      "password": "qwerty",
+      "speciality": "Neurología",
+      "dni": "32165487",
+      "email": "raull@correo.com",
+      "phone": "965432109"
+    }
+  ],
+  "inventory": [
+    {
+      "id": 1,
+      "name": "Antiinflamatorio (Meloxicam)",
+      "type": "Medicina",
+      "quantity": "1"
+    },
+    {
+      "id": 2,
+      "name": "Antibiótico (Amoxicilina)",
+      "type": "Medicina",
+      "quantity": 30
+    },
+    {
+      "id": 3,
+      "name": "Croquetas para perros (Adulto)",
+      "type": "Comida",
+      "quantity": 100
+    },
+    {
+      "id": 4,
+      "name": "Comida húmeda para gatos",
+      "type": "Comida",
+      "quantity": 80
+    },
+    {
+      "id": 5,
+      "name": "Pelota de goma",
+      "type": "Juguete",
+      "quantity": 20
+    },
+    {
+      "id": 6,
+      "name": "Rascador para gatos",
+      "type": "Juguete",
+      "quantity": 15
+    },
+    {
+      "id": 7,
+      "name": "Cepillo dental para mascotas",
+      "type": "Accesorio",
+      "quantity": 40
+    },
+    {
+      "id": 8,
+      "name": "Shampoo para perros",
+      "type": "Cuidado personal",
+      "quantity": 25
+    },
+    {
+      "id": 9,
+      "name": "Suplemento de vitaminas",
+      "type": "Medicina",
+      "quantity": 60
+    },
+    {
+      "id": 10,
+      "name": "Arena para gatos",
+      "type": "Accesorio",
+      "quantity": "1"
+    },
+    {
+      "name": "franco",
+      "type": "bueno :c eso creo",
+      "quantity": "lo di todo",
+      "id": 11
+    },
+    {
+      "name": "daphne :c",
+      "type": "maldita",
+      "quantity": "0",
+      "id": 12
     }
   ]
 }

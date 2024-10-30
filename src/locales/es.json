@@ -30,5 +30,27 @@
         "Personal": "Datos Personales",
         "Save": "Guardar",
         "Cancel": "Cancelar"
+    },
+    "Apointments": {
+        "Photo": "Foto",
+        "Pet": "Mascota",
+        "Date": "Fecha",
+        "Time": "Hora",
+        "State": "Estado",
+        "Diagnostic": "Diagnóstico",
+        "Edit": "Editar",
+        "history": "Historial",
+        "Save": "Guardar",
+        "pending": "Pendiente",
+        "completed": "Completado",
+        "historyclinic": "Historial Clínico",
+        "history_clinic": "Historial Clínico - Mascota:",
+        "reasonConsultation": "Motivo de Consulta:",
+        "Propiertary": "Propietario:",
+        "Diagnostic_presumptive": "Diagnóstico Presuntivo:",
+        "treatment": "Tratamiento:",
+        "observations": "Observaciones Adicionales:",
+        "Close": "Cerrar",
+        "edithistory": "Editar Historial"
     }
 }
