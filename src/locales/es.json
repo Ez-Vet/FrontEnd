@@ -12,7 +12,8 @@
         "ToLogin": "¿Ya tienes una cuenta?",
         "ToRegister": "Crear cuenta",
         "Speciality": "Especialidad",
-        "Phone": "Celular"
+        "Phone": "Celular",
+        "Username": "Correo Electrónico"
     },
     "Sidebar": {
         "Profile": "Perfil",
