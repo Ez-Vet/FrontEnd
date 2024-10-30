@@ -12,7 +12,8 @@
         "ToLogin": "Already have an account?",
         "ToRegister": "create account",
         "Speciality": "Speciality",
-        "Phone": "Phone"
+        "Phone": "Phone",
+        "Username": "Email"
     },
     "Sidebar": {
         "Profile": "Profile",

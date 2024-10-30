@@ -65,7 +65,7 @@ export default {
         <div class="flex flex-col gap-3">
           <label for="username" class="text-left">{{ $t('Access.Username') }}</label>
           <pv-inputtext id="username" class="custom-input" v-model="email" type="text" size="small"
-            placeholder="enter your username" />
+            placeholder="enter your email" />
 
           <label for="password" class="text-left">{{ $t('Access.Password') }}</label>
           <pv-inputtext type="password" id="password" class="custom-input" v-model="password" size="small" toggleMask
