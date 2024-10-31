@@ -11,7 +11,7 @@
       "time": "10:00",
       "status": false,
       "history": {
-        "diagnosis": "Gastritis",
+        "diagnosis": "Gastriti",
         "reasonConsultation": "Vómitos ocasionales, pérdida de apetito",
         "treatment": "Dieta blanda, pastillas y mucho amor",
         "observations": "Monitorear signos de empeoramiento."
@@ -131,7 +131,8 @@
       "speciality": "Groomer",
       "dni": "453212365",
       "email": "diego@correo.com",
-      "phone": "980552320"
+      "phone": "980552320",
+      "type": "doctor"
     },
     {
       "id": 2,
@@ -140,7 +141,8 @@
       "speciality": "Medicina Interna",
       "dni": "12345678",
       "email": "carlosr@correo.com",
-      "phone": "987654321"
+      "phone": "987654321",
+      "type": "doctor"
     },
     {
       "id": 3,
@@ -149,7 +151,8 @@
       "speciality": "Dermatología",
       "dni": "87654321",
       "email": "mariag@correo.com",
-      "phone": "912345678"
+      "phone": "912345678",
+      "type": "doctor"
     },
     {
       "id": 4,
@@ -158,7 +161,8 @@
       "speciality": "Cirugía",
       "dni": "45612378",
       "email": "josem@correo.com",
-      "phone": "934567890"
+      "phone": "934567890",
+      "type": "doctor"
     },
     {
       "id": 5,
@@ -167,7 +171,8 @@
       "speciality": "Odontología",
       "dni": "78945612",
       "email": "lucias@correo.com",
-      "phone": "956789012"
+      "phone": "956789012",
+      "type": "doctor"
     },
     {
       "id": 6,
@@ -176,7 +181,48 @@
       "speciality": "Neurología",
       "dni": "32165487",
       "email": "raull@correo.com",
-      "phone": "965432109"
+      "phone": "965432109",
+      "type": "doctor"
+    },
+    {
+      "id": 7,
+      "fullname": "Ana Torres",
+      "password": "anapass",
+      "speciality": null,
+      "dni": "14785236",
+      "email": "ana.torres@correo.com",
+      "phone": "912345987",
+      "type": "client"
+    },
+    {
+      "id": 8,
+      "fullname": "Juan Pérez",
+      "password": "juanpass",
+      "speciality": null,
+      "dni": "96325841",
+      "email": "juan.perez@correo.com",
+      "phone": "934568923",
+      "type": "client"
+    },
+    {
+      "id": 9,
+      "fullname": "Luis Fernández",
+      "password": "luispass",
+      "speciality": null,
+      "dni": "74125896",
+      "email": "luis.fernandez@correo.com",
+      "phone": "945678123",
+      "type": "client"
+    },
+    {
+      "id": 10,
+      "fullname": "María López",
+      "password": "mariapass",
+      "speciality": null,
+      "dni": "85236947",
+      "email": "maria.lopez@correo.com",
+      "phone": "956789564",
+      "type": "client"
     }
   ],
   "inventory": [

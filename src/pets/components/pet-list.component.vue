@@ -1,6 +1,6 @@
 <template>
     <div class="main-content">
-        <pv-button class="btn" @click="openDialog = true">Añadir mascota</pv-button>
+        <pv-button class="btn" @click="openDialog = true">{{ $t('Pet.Add_Pet') }}</pv-button>
         <div class="pet-list">
             <template v-for="pet in pets">
                 <petCard :pet="pet" />
@@ -8,14 +8,14 @@
         </div>
     </div>
 
-    <pv-dialog v-model:visible="openDialog" modal header="Nueva mascota">
+    <pv-dialog v-model:visible="openDialog" modal :header="$t('Pet.NewPet')">
         <div class="dialog-content">
-            <pv-inputtext v-model="newPet.name" placeholder="Nombre" />
-            <pv-inputtext v-model="newPet.species" placeholder="Especie" />
-            <pv-inputtext v-model="newPet.age" placeholder="Edad" />
-            <pv-inputtext v-model="newPet.gender" placeholder="Sexo" />
-            <pv-inputtext v-model="newPet.description" placeholder="Descripcion" />
-            <pv-button @click="savePet">Guardar</pv-button>
+            <pv-inputtext v-model="newPet.name" :placeholder="$t('Pet.Name')" />
+            <pv-inputtext v-model="newPet.species" :placeholder="$t('Pet.Species')" />
+            <pv-inputtext v-model="newPet.age" :placeholder="$t('Pet.Age')" />
+            <pv-inputtext v-model="newPet.gender" :placeholder="$t('Pet.Gender')" />
+            <pv-inputtext v-model="newPet.description" :placeholder="$t('Pet.Description')" />
+            <pv-button @click="savePet">{{ $t('Pet.Save') }}</pv-button>
         </div>
     </pv-dialog>
 </template>

@@ -3,23 +3,24 @@
         "Login": "Log In",
         "Register": "Register",
         "Fullname": "Fullname",
-        "uLabel": "enter your username",
+        "uLabel": "Enter Your Username",
         "Password": "Password",
-        "pLabel": "enter your password",
+        "pLabel": "Enter Your Password",
         "C_password": "Confirm Password",
-        "cpLabel": "confirm your password",
+        "cpLabel": "Confirm Your Password",
         "SignIn": "Sign In",
-        "ToLogin": "Already have an account?",
-        "ToRegister": "create account",
+        "ToLogin": "Already Have An Account?",
+        "ToRegister": "Create Account",
         "Speciality": "Speciality",
         "Phone": "Phone",
         "Username": "Email"
     },
     "Sidebar": {
         "Profile": "Profile",
-        "Quotes": "Appointments ",
+        "Quotes": "Appointments",
         "Inventory": "Inventory",
-        "Community": "Community"
+        "Community": "Community",
+        "Pet": "Pets"
     },
     "Profile": {
         "Phone": "Phone",
@@ -32,7 +33,7 @@
         "Save": "Save",
         "Cancel": "Cancel"
     },
-    "Apointments": {
+    "Appointments": {
         "Photo": "Photo",
         "Pet": "Pet",
         "Date": "Date",
@@ -40,18 +41,41 @@
         "State": "State",
         "Diagnostic": "Diagnostic",
         "Edit": "Edit",
-        "history": "History",
+        "History": "History",
         "Save": "Save",
-        "pending": "Pending",
-        "completed": "Completed",
-        "historyclinic": "Clinical History",
-        "history_clinic": "Clinical History - Pet:",
-        "reasonConsultation": "Reason for Consultation:",
-        "Propiertary": "Propiertary:",
-        "Diagnostic_presumptive": "Presumptive Diagnosis:",
-        "treatment": "Treatment:",
-        "observations": "Additional Observations:",
+        "Pending": "Pending",
+        "Completed": "Completed",
+        "HistoryClinic": "Clinical History",
+        "History_Clinic": "Clinical History - Pet:",
+        "ReasonConsultation": "Reason For Consultation:",
+        "Propiertary": "Proprietary:",
+        "DiagnosticPresumptive": "Presumptive Diagnosis:",
+        "Treatment": "Treatment:",
+        "Observations": "Additional Observations:",
         "Close": "Close",
-        "edithistory": "Edit History"
+        "EditHistory": "Edit History"
+    },
+    "Inventory": {
+        "Product": "Product",
+        "Type": "Type",
+        "Stock": "Stock",
+        "Edit": "Edit",
+        "Add_Product": "Add Product",
+        "Save": "Save",
+        "Add": "Add",
+        "EditStock": "Edit Stock",
+        "NewProduct": "New Product",
+        "Name": "Name"
+    },
+    "Pet": {
+        "Name": "Name",
+        "Species": "Species",
+        "Age": "Age",
+        "Gender": "Gender",
+        "Description": "Description",
+        "Edit": "Edit",
+        "Add_Pet": "Add Pet",
+        "Save": "Save",
+        "NewPet": "New Pet"
     }
 }

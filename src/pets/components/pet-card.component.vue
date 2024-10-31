@@ -1,28 +1,28 @@
 <template>
     <pv-card class="card">
         <template #title>
-            Nombre: {{ pet.name }}
+            {{ $t('Pet.Name') }} {{ pet.name }}
             <pv-divider />
         </template>
         <template #content>
             <div class="card-content">
                 <div class="card-item">
-                    <h2>Especie</h2>
+                    <h2>{{ $t('Pet.Species') }}</h2>
                     <pv-inputtext v-model="pet.species" v-model:disabled="editMode" class="input" />
                 </div>
                 <div class="card-item">
-                    <h2>Edad</h2>
+                    <h2>{{ $t('Pet.Age') }}</h2>
                     <pv-inputtext v-model="pet.age" v-model:disabled="editMode" class="input" />
                 </div>
                 <div class="card-item">
-                    <h2>Sexo</h2>
+                    <h2>{{ $t('Pet.Gender') }}</h2>
                     <pv-inputtext v-model="pet.gender" v-model:disabled="editMode" class="input" />
                 </div>
                 <div class="card-item">
-                    <h2>Descripcion</h2>
+                    <h2>{{ $t('Pet.Description') }}</h2>
                     <pv-inputtext v-model="pet.description" v-model:disabled="editMode" class="input" />
                 </div>
-                <pv-button @click="edit">{{ editMode ? 'Editar' : 'Guardar' }}</pv-button>
+                <pv-button @click="edit">{{ editMode ? $t('Pet.Edit') : $t('Pet.Save') }}</pv-button>
             </div>
         </template>
     </pv-card>

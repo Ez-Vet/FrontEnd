@@ -5,6 +5,11 @@ export default {
     name: "sidebar",
     components: {
         changelangComponent
+    },
+    computed: {
+        isClientRoute() {
+            return this.$route.path.startsWith('/client');
+        }
     }
 }
 
@@ -17,43 +22,46 @@ export default {
         </div>
 
         <div class="icons">
-            <RouterLink to="/profile">
+            <!-- Estos enlaces ahora son relativos al contexto actual (client o doctor) -->
+            <RouterLink to="profile">
                 <button class="button">
-                    <!-- <i class="pi pi-user"></i> -->
                     <img src="/img/user-icon.png">
                     {{ $t('Sidebar.Profile') }}
                 </button>
             </RouterLink>
 
-            <RouterLink to="/appointments">
+            <RouterLink to="appointments">
                 <button class="button">
-                    <!-- <i class="pi pi-address-book"></i> -->
                     <img src="/img/book-icon.png">
                     {{ $t('Sidebar.Quotes') }}
                 </button>
             </RouterLink>
+            <template v-if="!isClientRoute">
+                <RouterLink to="inventory">
+                    <button class="button">
+                        <img src="/img/pet-icon.png">
+                        {{ $t('Sidebar.Inventory') }}
+                    </button>
+                </RouterLink>
+            </template>
 
-            <RouterLink to="/inventory">
-                <button class="button">
-                    <img src="/img/pet-icon.png">
-                    {{ $t('Sidebar.Inventory') }}
-                </button>
-            </RouterLink>
+            <template v-if="isClientRoute">
+                <RouterLink to="pets">
+                    <button class="button">
+                        <img src="/img/pet-icon.png">
+                        {{ $t('Sidebar.Pet') }}
+                    </button>
+                </RouterLink>
+            </template>
 
-            <RouterLink to="/pets">
-                <button class="button">
-                    <img src="/img/pet-icon.png">
-                    Mascotiñas
-                </button>
-            </RouterLink>
-
-            <button class="button">
+            <!-- <button class="button">
                 <img src="/img/people-icon.png">
                 {{ $t('Sidebar.Community') }}
-            </button>
+            </button> -->
         </div>
     </div>
 </template>
+
 
 <style scoped>
 .sidebar {
