@@ -252,5 +252,47 @@
       "quantity": "0",
       "id": 12
     }
+  ],
+  "pets": [
+    {
+      "id": 1,
+      "name": "Luna",
+      "species": "Perro",
+      "age": 3,
+      "gender": "Hembra",
+      "description": "Pastor alemán muy juguetona y leal"
+    },
+    {
+      "id": 2,
+      "name": "Simba",
+      "species": "Gato",
+      "age": 5,
+      "gender": "Macho",
+      "description": "Gato siamés, independiente pero cariñoso"
+    },
+    {
+      "id": 3,
+      "name": "Rex",
+      "species": "Perro",
+      "age": 2,
+      "gender": "Macho",
+      "description": "Labrador enérgico, adora los paseos largos"
+    },
+    {
+      "id": 4,
+      "name": "Nala",
+      "species": "Gato",
+      "age": 4,
+      "gender": "Hembra",
+      "description": "Gata persa, tranquila y hogareña"
+    },
+    {
+      "id": 5,
+      "name": "Milo",
+      "species": "Conejo",
+      "age": 1,
+      "gender": "Macho",
+      "description": "Conejo enano, sociable y curioso"
+    }
   ]
 }

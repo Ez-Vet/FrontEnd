@@ -40,6 +40,13 @@ export default {
                 </button>
             </RouterLink>
 
+            <RouterLink to="/pets">
+                <button class="button">
+                    <img src="/img/pet-icon.png">
+                    Mascotiñas
+                </button>
+            </RouterLink>
+
             <button class="button">
                 <img src="/img/people-icon.png">
                 {{ $t('Sidebar.Community') }}
