@@ -26,7 +26,7 @@ export default {
         .then((response => {
           if (response.status == 201) {
             alert('Account created.')
-            this.$router.push("/profile");
+            this.$router.push("/doctor/profile");
           }
           else
             alert('Account not created.')
