@@ -36,6 +36,8 @@ export default {
               this.$router.push('/client/profile');
             else
               this.$router.push('/doctor/profile');
+
+            localStorage.setItem('user', data[0].id);
           }
           else
             this.errorMessage = "username or password is incorrect";
