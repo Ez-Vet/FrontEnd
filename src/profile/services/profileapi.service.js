@@ -6,10 +6,12 @@ export class ProfileApi {
     }
 
     getProfileData() {
-        return http.get(`${this.endpoint}?id=1`);
+        const id = localStorage.getItem('user');
+        return http.get(`${this.endpoint}?id=${id}`);
     }
 
     updateProfileData(profile) {
-        return http.put(`${this.endpoint}/1`, profile);
+        const id = localStorage.getItem('user');
+        return http.put(`${this.endpoint}/${id}`, profile);
     }
 }
