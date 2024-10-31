@@ -32,7 +32,10 @@ export default {
 
           if (data.length > 0) {
             alert('Login successful.')
-            this.$router.push('/profile');
+            if (data[0].type === 'client')
+              this.$router.push('/client/profile');
+            else
+              this.$router.push('/doctor/profile');
           }
           else
             this.errorMessage = "username or password is incorrect";

@@ -31,11 +31,6 @@ export default {
     },
     components: { notificationComponent },
     mounted() {
-        /*    this.api.getNotifications().then((response => {
-               const data = response.data;
-   
-               this.appointments = data.map(notification => new Notification(notification));
-           })) */
 
         this.api.getNotifications().then((res => {
             const data = res.data;

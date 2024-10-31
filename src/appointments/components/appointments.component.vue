@@ -4,10 +4,16 @@
         <div class="content-wrapper">
             <!-- Tabla de citas con fotos -->
             <div class="table-section">
-                <DataTable :value="appointments" class="custom-table" responsiveLayout="scroll" :paginator="true"
-                    :rows="5">
+                <DataTable v-model:filters="filters" :value="appointments" class="custom-table"
+                    responsiveLayout="scroll" :paginator="true" :rows="5">
+                    <template #header>
+                        <div class="flex justify-end gap-5">
+                            <pv-inputtext v-model="filters['global'].value" placeholder="Search" />
+                        </div>
+                    </template>
+
                     <!-- Columnas de la tabla -->
-                    <Column :header="$t('Apointments.Photo')">
+                    <Column :header="$t('Appointments.Photo')">
                         <template #body="{ data }">
                             <img :src="'/img/' + data.pet.img" :alt="data.pet.name + ' photo'" class="pet-photo"
                                 v-if="data.pet.img" />
@@ -15,102 +21,86 @@
                         </template>
                     </Column>
 
-                    <Column field="pet.name" :header="$t('Apointments.Pet')" />
-                    <Column field="date" :header="$t('Apointments.Date')" />
-                    <Column field="time" :header="$t('Apointments.Time')" />
-                    <Column :header="$t('Apointments.State')">
+                    <Column field="pet.name" :header="$t('Appointments.Pet')" />
+                    <Column field="date" :header="$t('Appointments.Date')" />
+                    <Column field="time" :header="$t('Appointments.Time')" />
+                    <Column :header="$t('Appointments.State')">
                         <template #body="{ data }">
                             <div class="edit_status">
-                                <Button @click="cambiarEstado(data)">{{ data.status ? $t('Apointments.completed') :
-                                    $t('Apointments.pending')
-                                    }}</Button>
+                                <template v-if="isClientRoute">
+                                    {{ data.status ? $t('Appointments.Completed') :
+                                        $t('Appointments.Pending')
+                                    }}
+                                </template>
+
+                                <template v-else="isClientRoute">
+                                    <Button @click="cambiarEstado(data)">{{ data.status ? $t('Appointments.Completed') :
+                                        $t('Appointments.Pending')
+                                        }}</Button>
+                                </template>
                             </div>
                         </template>
                     </Column>
 
-                    <Column :header="$t('Apointments.Diagnostic')">
+                    <Column :header="$t('Appointments.Diagnostic')">
 
                         <template #body="{ data }">
                             <div class="action-buttons">
-                                <Button :label="$t('Apointments.Edit')" class="edit-button p-button-sm"
-                                    @click="editarDiagnostico(data)" />
-                                <Button :label="$t('Apointments.history')" class="history-button p-button-sm ml-2"
+                                <template v-if="!isClientRoute">
+                                    <Button :label="$t('Appointments.Edit')" class="edit-button p-button-sm"
+                                        @click="editarDiagnostico(data)" />
+                                </template>
+
+                                <Button :label="$t('Appointments.History')" class="history-button p-button-sm ml-2"
                                     @click="verHistorial(data)" />
                             </div>
                         </template>
                     </Column>
                 </DataTable>
             </div>
-
-            <!-- Sección de filtros -->
-            <div class="filter-section">
-                <h3>Buscar por:</h3>
-
-                <!-- Filtro por Mascota -->
-                <div class="filter-option">
-                    <AutoComplete v-model="selectedMascota" :suggestions="filteredMascotas"
-                        completeMethod="filterMascota" field="mascota" placeholder="Buscar por Mascota" />
-                </div>
-
-                <!-- Filtro por Fecha -->
-                <div class="filter-option">
-                    <Calendar v-model="selectedDate" dateFormat="yy-mm-dd" placeholder="Buscar por Fecha" />
-                </div>
-
-                <!-- Filtro por Estado (con opción "Todos") -->
-                <div class="filter-option">
-                    <Dropdown v-model="selectedEstado" :options="estados" optionLabel="estado"
-                        placeholder="Seleccionar Estado" />
-                </div>
-
-                <!-- Filtro por Dueño -->
-                <div class="filter-option">
-                    <AutoComplete v-model="selectedDueno" :suggestions="filteredDuenos" completeMethod="filterDueno"
-                        field="dueno" placeholder="Buscar por Dueño" />
-                </div>
-            </div>
         </div>
     </div>
 
     <!-- Modal para ver y editar el historial -->
-    <Dialog :header="$t('Apointments.historyclinic')" v-model:visible="showHistoryDialog" :modal="true" :closable="true"
-        class="custom-dialog">
+    <Dialog :header="$t('Appointments.HistoryClinic')" v-model:visible="showHistoryDialog" :modal="true"
+        :closable="true" class="custom-dialog">
         <div class="historial-card">
-            <h3>{{ $t('Apointments.history_clinic') }} {{ historialSeleccionado.pet.name }}</h3>
-            <p><strong>{{ $t('Apointments.Propiertary') }}</strong> {{ historialSeleccionado.pet.owner }}</p>
-            <p><strong>🩺 {{ $t('Apointments.reasonConsultation') }}</strong> {{
+            <h3>{{ $t('Appointments.History_Clinic') }} {{ historialSeleccionado.pet.name }}</h3>
+            <p><strong>{{ $t('Appointments.Propiertary') }}</strong> {{ historialSeleccionado.pet.owner }}</p>
+            <p><strong>🩺 {{ $t('Appointments.ReasonConsultation') }}</strong> {{
                 historialSeleccionado.history.reasonConsultation }}</p>
-            <p><strong>📋 {{ $t('Apointments.Diagnostic_presumptive') }}</strong> {{
+            <p><strong>📋 {{ $t('Appointments.DiagnosticPresumptive') }}</strong> {{
                 historialSeleccionado.history.diagnosis
             }}
             </p>
-            <p><strong>💊 {{ $t('Apointments.treatment') }}</strong> {{ historialSeleccionado.history.treatment }}</p>
-            <p><strong>📅 {{ $t('Apointments.observations') }}</strong> {{ historialSeleccionado.history.observations }}
+            <p><strong>💊 {{ $t('Appointments.Treatment') }}</strong> {{ historialSeleccionado.history.treatment }}</p>
+            <p><strong>📅 {{ $t('Appointments.Observations') }}</strong> {{ historialSeleccionado.history.observations
+                }}
             </p>
         </div>
-        <Button :label="$t('Apointments.Close')" icon="pi pi-times" class="p-button-danger mt-2"
+        <Button :label="$t('Appointments.Close')" icon="pi pi-times" class="p-button-danger mt-2"
             @click="showHistoryDialog = false" />
     </Dialog>
 
-    <Dialog :header="$t('Apointments.edithistory')" v-model:visible="showEditDialog" :modal="true" :closable="true"
+    <Dialog :header="$t('Appointments.EditHistory')" v-model:visible="showEditDialog" :modal="true" :closable="true"
         class="custom-dialog">
         <div class="edit-card">
-            <h3>{{ $t('Apointments.history_clinic') }} {{ citaSeleccionada.pet.name }}</h3>
-            <p><strong>{{ $t('Apointments.Propiertary') }}</strong> {{ citaSeleccionada.pet.owner }}</p>
+            <h3>{{ $t('Appointments.History_Clinic') }} {{ citaSeleccionada.pet.name }}</h3>
+            <p><strong>{{ $t('Appointments.Propiertary') }}</strong> {{ citaSeleccionada.pet.owner }}</p>
             <hr />
-            <p><strong>🩺 {{ $t('Apointments.reasonConsultation') }}</strong></p>
+            <p><strong>🩺 {{ $t('Appointments.ReasonConsultation') }}</strong></p>
             <textarea v-model="citaSeleccionada.history.reasonConsultation" rows="2" class="editable-field"></textarea>
 
-            <p><strong>📋 {{ $t('Apointments.Diagnostic_presumptive') }}</strong></p>
+            <p><strong>📋 {{ $t('Appointments.DiagnosticPresumptive') }}</strong></p>
             <textarea v-model="citaSeleccionada.history.diagnosis" rows="2" class="editable-field"></textarea>
 
-            <p><strong>💊 {{ $t('Apointments.treatment') }}</strong></p>
+            <p><strong>💊 {{ $t('Appointments.Treatment') }}</strong></p>
             <textarea v-model="citaSeleccionada.history.treatment" rows="2" class="editable-field"></textarea>
 
-            <p><strong>📅 {{ $t('Apointments.observations') }}</strong></p>
+            <p><strong>📅 {{ $t('Appointments.Observations') }}</strong></p>
             <textarea v-model="citaSeleccionada.history.observations" rows="2" class="editable-field"></textarea>
         </div>
-        <Button :label="$t('Apointments.Save')" class="p-button-success mt-2"
+        <Button :label="$t('Appointments.Save')" class="p-button-success mt-2"
             @click="guardarDiagnostico(citaSeleccionada)" />
     </Dialog>
 </template>
@@ -130,6 +120,7 @@ import Dropdown from 'primevue/dropdown';
 import { AppointmentsApiService } from '../services/appointmentapi.service';
 import { Appointment } from '../model/appointment.entity'
 import changelangComponent from "../../public/components/changelang.component.vue";
+import { FilterMatchMode } from '@primevue/core/api';
 export default {
 
     components: {
@@ -148,49 +139,17 @@ export default {
     data() {
         return {
             api: new AppointmentsApiService(),
-            appointments: null,
+            appointments: null, filters: {
+                global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+            },
+        }
+    },
+    computed: {
+        isClientRoute() {
+            return this.$route.path.startsWith('/client');
         }
     },
     setup() {
-        /*   const citas = ref([
-              {
-                  mascota: 'Firulais',
-                  fecha: '2024-10-20',
-                  hora: '10:00',
-                  estado: 'Pendiente',
-                  diagnostico: 'Problemas de estómago',
-                  motivoConsulta: 'Vómitos ocasionales, pérdida de apetito',
-                  tratamiento: 'Dieta blanda por 48 horas',
-                  observaciones: 'Monitorear signos de empeoramiento.',
-                  dueno: 'Juan Pérez',
-                  image: 'firulais.jpg'
-              },
-              {
-                  mascota: 'Max',
-                  fecha: '2024-11-02',
-                  hora: '12:00',
-                  estado: 'Atendido',
-                  diagnostico: 'Problemas de piel',
-                  motivoConsulta: 'Rascarse excesivamente',
-                  tratamiento: 'Crema tópica antihistamínica',
-                  observaciones: 'Revisar en 1 semana.',
-                  dueno: 'María López',
-                  image: 'max.jpg'
-              },
-              {
-                  mascota: 'Luna',
-                  fecha: '2024-10-25',
-                  hora: '14:00',
-                  estado: 'Pendiente',
-                  diagnostico: 'Dolor en las articulaciones',
-                  motivoConsulta: 'Dificultad para caminar y saltar',
-                  tratamiento: 'Antiinflamatorio no esteroideo (meloxicam)',
-                  observaciones: 'Control en 1 mes.',
-                  dueno: 'Carlos Sánchez',
-                  image: 'luna.jpg'
-              }
-          ]); */
-
         const searchQuery = ref('');
         const selectedMascota = ref(null);
         const selectedDate = ref(null);
@@ -442,6 +401,7 @@ export default {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
+.historial-card,
 .edit-card {
     width: 500px;
     padding: 0;

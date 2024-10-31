@@ -13,6 +13,8 @@ import 'primeicons/primeicons.css';
 import router from './routes/index.js';
 import Popover from 'primevue/popover';
 import Divider from 'primevue/divider';
+import Card from 'primevue/card';
+import Dialog from 'primevue/dialog';
 
 
 const app = createApp(App);
@@ -38,5 +40,7 @@ app.component("pv-button", Button);
 app.component("pv-togglebutton", ToggleButton);
 app.component("pv-popover", Popover);
 app.component("pv-divider", Divider);
+app.component("pv-card", Card);
+app.component("pv-dialog", Dialog);
 
 app.mount('#app');

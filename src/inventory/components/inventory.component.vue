@@ -8,18 +8,18 @@
                     :paginator="true" :rows="5">
                     <template #header>
                         <div class="flex justify-end gap-5">
-                            <Button label="Agregar Producto" class="add-button" @click="openAddDialog" />
+                            <Button :label="$t('Inventory.Add_Product')" class="add-button" @click="openAddDialog" />
                             <pv-inputtext v-model="filters['global'].value" placeholder="Search" />
                         </div>
                     </template>
                     <!-- Columnas de la tabla -->
-                    <Column field="name" sortable header="Producto" />
-                    <Column field="type" sortable header="Tipo" />
-                    <Column field="quantity" header="Cantidad" sortable>
+                    <Column field="name" sortable :header="$t('Inventory.Product')" />
+                    <Column field="type" sortable :header="$t('Inventory.Type')" />
+                    <Column field="quantity" :header="$t('Inventory.Stock')" sortable>
                         <template #body="{ data }">
                             <div class="edit-quantity">
                                 <span>{{ data.quantity }}</span>
-                                <Button @click="openDialog(data)">Editar</Button>
+                                <Button @click="openDialog(data)">{{ $t('Inventory.Edit') }}</Button>
                             </div>
                         </template>
                     </Column>
@@ -28,19 +28,19 @@
         </div>
     </div>
 
-    <Dialog header="Editar cantidad" v-model:visible="showEditDialog" :modal="true" :closable="true"
+    <Dialog :header="$t('Inventory.EditStock')" v-model:visible="showEditDialog" :modal="true" :closable="true"
         class="custom-dialog">
         <pv-inputtext v-model="selectedProduct.quantity" />
-        <Button label="Guardar Cambios" class="p-button-success mt-2" @click="updateProduct(selectedProduct)" />
+        <Button :label="$t('Inventory.Save')" class="p-button-success mt-2" @click="updateProduct(selectedProduct)" />
     </Dialog>
 
-    <Dialog header="Nuevo producto" v-model:visible="showAddDialog" :modal="true" :closable="true"
+    <Dialog :header="$t('Inventory.NewProduct')" v-model:visible="showAddDialog" :modal="true" :closable="true"
         class="custom-dialog ">
         <div class="add-dialog">
-            <pv-inputtext v-model="newProduct.name" placeholder="Nombre" />
-            <pv-inputtext v-model="newProduct.type" placeholder="Tipo" />
-            <pv-inputtext v-model="newProduct.quantity" placeholder="Cantidad" />
-            <Button label="Añadir" class="p-button-success mt-2" @click="addProduct" />
+            <pv-inputtext v-model="newProduct.name" :placeholder="$t('Inventory.Name')" />
+            <pv-inputtext v-model="newProduct.type" :placeholder="$t('Inventory.Type')" />
+            <pv-inputtext v-model="newProduct.quantity" :placeholder="$t('Inventory.Stock')" />
+            <Button :label="$t('Inventory.Add')" class="p-button-success mt-2" @click="addProduct" />
         </div>
     </Dialog>
 </template>
