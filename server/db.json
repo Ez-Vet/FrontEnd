@@ -128,11 +128,10 @@
       "id": 1,
       "fullname": "Diego Bastidas",
       "password": "Hola123",
-      "speciality": "Groomer",
-      "dni": "453212365",
+      "speciality": "Cirujano",
+      "dni": "103659215",
       "email": "diego@correo.com",
-      "phone": "980552320",
-      "type": "doctor"
+      "phone": "95203296"
     },
     {
       "id": 2,
@@ -285,18 +284,6 @@
       "name": "Arena para gatos",
       "type": "Accesorio",
       "quantity": "1"
-    },
-    {
-      "name": "franco",
-      "type": "bueno :c eso creo",
-      "quantity": "lo di todo",
-      "id": 11
-    },
-    {
-      "name": "daphne :c",
-      "type": "maldita",
-      "quantity": "0",
-      "id": 12
     }
   ],
   "pets": [
