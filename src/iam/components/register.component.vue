@@ -7,7 +7,7 @@ export default {
   components: { changelangComponent },
   data() {
     return {
-      fullname: '',
+      name: '',
       email: '',
       password: '',
       speciality: '',
@@ -22,7 +22,7 @@ export default {
       this.$router.push("/login");
     },
     register() {
-      this.api.register(this.fullname, this.email, this.password, this.speciality, this.dni, this.phone)
+      this.api.register(this.name, this.email, this.password, this.speciality, this.dni, this.phone)
         .then((response => {
           if (response.status == 201) {
             alert('Account created.')
@@ -61,7 +61,7 @@ export default {
           <label for="username" class="text-left">
             {{ $t('Access.Fullname') }}
           </label>
-          <pv-inputtext id="username" class="custom-input cursor-text" v-model="fullname" type="text" size="small"
+          <pv-inputtext id="username" class="custom-input cursor-text" v-model="name" type="text" size="small"
             placeholder="enter your username" />
 
           <label for="email" class="text-left">

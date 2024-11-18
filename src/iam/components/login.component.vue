@@ -30,14 +30,14 @@ export default {
         .then((response) => {
           const data = response.data;
 
-          if (data.length > 0) {
+          if (data) {
             alert('Login successful.')
-            if (data[0].type === 'client')
+            if (data.type === 'client')
               this.$router.push('/client/profile');
             else
               this.$router.push('/doctor/profile');
 
-            localStorage.setItem('user', data[0].id);
+            localStorage.setItem('user', data.id);
           }
           else
             this.errorMessage = "username or password is incorrect";

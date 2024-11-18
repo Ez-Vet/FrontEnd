@@ -3,16 +3,17 @@ import { User } from '../model/user.entity';
 
 export class AuthApiService {
     constructor() {
-        this.endpoint = '/users';
+        this.endpoint = '/authentication';
     }
 
     login(email, password) {
-        return http.get(`${this.endpoint}?email=${email}&password=${password}`);
+        const user = new User({ email, password });
+        return http.post(`${this.endpoint}/sign-in`, user);
     }
 
-    register(fullname, email, password, speciality, dni, phone) {
-        const user = new User({ fullname, email, password, speciality, dni, phone });
+    register(name, email, password, speciality, dni, phone) {
+        const user = new User({ name, email, password, speciality, dni, phone });
 
-        return http.post(this.endpoint, user)
+        return http.post(`${this.endpoint}/sign-up`, user)
     }
 }
